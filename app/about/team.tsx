@@ -17,6 +17,13 @@ const teamMembers = [
     imagePosition: "50% 24%",
   },
   {
+    name: "Sandra Koech",
+    role: "Caregiving Trainer",
+    bio: "Delivers practical caregiving instruction that helps prepare learners for healthcare and care-support roles with empathy and professionalism.",
+    image: "/team/sandra.jpg",
+    imagePosition: "50% 23%",
+  },
+  {
     name: "Wafula Lawrence",
     role: "Head of Music & Media Arts",
     bio: "Guides the Music and Media Arts programmes, encouraging creative exploration, confident performance, and hands-on media production.",
@@ -43,13 +50,6 @@ const teamMembers = [
     bio: "Teaches German and supports learners as they build language proficiency for further study and international career opportunities.",
     image: "/team/faith.jpg",
     imagePosition: "50% 24%",
-  },
-  {
-    name: "Sandra Koech",
-    role: "Caregiving Trainer",
-    bio: "Delivers practical caregiving instruction that helps prepare learners for healthcare and care-support roles with empathy and professionalism.",
-    image: "/team/sandra.jpg",
-    imagePosition: "50% 23%",
   },
   {
     name: "Daisy Jelagat",
