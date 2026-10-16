@@ -709,7 +709,7 @@ export default function Navbar() {
                         departments.map((d) => (
                           <Link
                             key={d._id}
-                            href={`#`}
+                           href={departmentError ? "#" : `/schools/${d._id}`}
                             role="menuitem"
                             onClick={closeMenus}
                             tabIndex={panelOpen ? 0 : -1}
