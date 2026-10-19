@@ -10,18 +10,18 @@ const teamMembers = [
     isDirector: true,
   },
   {
+    name: "Sandra Koech",
+    role: "Registrar (Admissions and student records)",
+    bio: "Delivers practical caregiving instruction that helps prepare learners for healthcare and care-support roles with empathy and professionalism.",
+    image: "/team/sandra.jpg",
+    imagePosition: "50% 23%",
+  },
+  {
     name: "Keter Titus",
     role: "Head of Science & Technology",
     bio: "Leads the Science and Technology department, with an emphasis on practical learning, technology integration, and skills shaped by industry needs.",
     image: "/team/keter.jpg",
     imagePosition: "50% 24%",
-  },
-  {
-    name: "Sandra Koech",
-    role: "Caregiving Trainer",
-    bio: "Delivers practical caregiving instruction that helps prepare learners for healthcare and care-support roles with empathy and professionalism.",
-    image: "/team/sandra.jpg",
-    imagePosition: "50% 23%",
   },
   {
     name: "Wafula Lawrence",
