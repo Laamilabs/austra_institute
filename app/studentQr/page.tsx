@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState, type ReactNode } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { api } from "@/lib/api/client";
-import { BookOpen, CalendarDays, CheckCircle2, GraduationCap, Mail, UserRound } from "lucide-react";
+import { BookOpen, CalendarDays, CheckCircle2, GraduationCap, Hash, Mail, UserRound } from "lucide-react";
 
 type StudentProfile = {
     fullName?: {
@@ -17,6 +17,7 @@ type StudentProfile = {
     courses?: Array<{
         name?: string;
         courseCode?: string | null;
+        admissionNumber?: string | null;   // ← add
         dateOfAdmission?: string | null;
         dateOfCompletion?: string | null;
     }>;
@@ -47,7 +48,7 @@ function Shell({ children }: { children: ReactNode }) {
                     className="object-cover"
                 />
                 <div className="absolute inset-0 bg-[#0B1F3A]/70" aria-hidden="true" />
-                <div className="relative mx-auto flex w-full max-w-6xl items-center gap-4 px-4 pb-24 pt-36 sm:px-6 sm:pb-28 sm:pt-24 lg:px-8 2xl:max-w-[1400px] 2xl:pb-32 2xl:pt-28">
+                <div className="relative mx-auto flex w-full max-w-6xl items-center gap-4 px-4 pb-24 pt-36 sm:px-6 sm:pb-28 sm:pt-24 lg:px-8 2xl:max-w-350 2xl:pb-32 2xl:pt-28">
                     <div className="grid h-12 w-12 shrink-0 place-items-center rounded-sm bg-orange-400 text-[#082B66] sm:h-14 sm:w-14">
                         <GraduationCap size={28} aria-hidden="true" />
                     </div>
@@ -62,7 +63,7 @@ function Shell({ children }: { children: ReactNode }) {
                 </div>
             </section>
 
-            <div className="relative mx-auto -mt-24 w-full max-w-6xl px-4 pb-12 sm:-mt-20 sm:px-6 sm:pb-16 lg:px-8 2xl:max-w-[1400px]">
+            <div className="relative mx-auto -mt-24 w-full max-w-6xl px-4 pb-12 sm:-mt-20 sm:px-6 sm:pb-16 lg:px-8 2xl:max-w-350">
                 {children}
                 <p className="mt-6 text-center text-xs leading-5 text-slate-500 sm:text-sm">
                     This profile displays information shared publicly by Austra Training Institute.
@@ -183,7 +184,7 @@ export default function StudentQrPage() {
                     <div className="flex flex-col gap-6 p-5 sm:p-7 md:flex-row md:items-center md:gap-8 lg:gap-10 lg:p-9">
                         {/* Portrait */}
                         <div className="mx-auto w-44 shrink-0 sm:w-52 md:mx-0 lg:w-56">
-                            <div className="relative aspect-[3/4] overflow-hidden rounded-sm bg-slate-100 ring-4 ring-orange-100">
+                            <div className="relative aspect-3/4 overflow-hidden rounded-sm bg-slate-100 ring-4 ring-orange-100">
                                 {student.profileImage && !imageFailed ? (
                                     // eslint-disable-next-line @next/next/no-img-element
                                     <img
@@ -193,7 +194,7 @@ export default function StudentQrPage() {
                                         onError={() => setImageFailed(true)}
                                     />
                                 ) : (
-                                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-b from-slate-50 to-slate-200 text-5xl font-bold text-[#082B66] sm:text-6xl">
+                                    <div className="absolute inset-0 flex items-center justify-center bg-linear-to-b from-slate-50 to-slate-200 text-5xl font-bold text-[#082B66] sm:text-6xl">
                                         {initials || (
                                             <UserRound
                                                 size={64}
@@ -215,7 +216,7 @@ export default function StudentQrPage() {
                                 </p>
                             </div>
 
-                            <h1 className="mt-4 break-words text-3xl font-bold leading-tight tracking-tight text-[#082B66] sm:text-4xl lg:text-5xl">
+                            <h1 className="mt-4 wrap-break-word text-3xl font-bold leading-tight tracking-tight text-[#082B66] sm:text-4xl lg:text-5xl">
                                 {name || "Student"}
                             </h1>
 
@@ -227,7 +228,7 @@ export default function StudentQrPage() {
                             <div className="mt-6 flex flex-col items-center gap-3 md:items-start">
                                 <a
                                     href={`mailto:${displayEmail}`}
-                                    className="inline-flex max-w-full items-start gap-2 break-all text-sm leading-relaxed text-slate-600 transition-colors hover:text-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-orange-400 sm:text-base"
+                                    className="inline-flex max-w-full items-start gap-2 break-all text-sm leading-relaxed text-slate-600 transition-colors hover:text-orange-600 focus-visible:outline focus-visible:outline-orange-400 sm:text-base"
                                 >
                                     <Mail
                                         size={18}
@@ -308,13 +309,27 @@ export default function StudentQrPage() {
                                                             {course.name || "Course details unavailable"}
                                                         </h3>
 
-                                                        {course.courseCode && (
-                                                            <p className="mt-1 text-sm text-slate-500">
-                                                                Course code:{" "}
-                                                                <span className="font-semibold text-[#082B66]">
-                                                                    {course.courseCode}
-                                                                </span>
-                                                            </p>
+                                                        {(course.courseCode || course.admissionNumber) && (
+                                                            <dl className="mt-1.5 space-y-1 text-sm text-slate-500">
+                                                                {course.courseCode && (
+                                                                    <div className="flex flex-wrap items-baseline gap-x-1.5">
+                                                                        <dt>Course code:</dt>
+                                                                        <dd className="font-semibold text-[#082B66]">
+                                                                            {course.courseCode}
+                                                                        </dd>
+                                                                    </div>
+                                                                )}
+                                                                {course.admissionNumber && (
+                                                                    <div className="flex flex-wrap items-baseline gap-x-1.5">
+                                                                        <dt className="inline-flex items-center gap-1">
+                                                                                                                                                        ADM No:
+                                                                        </dt>
+                                                                        <dd className="font-mono font-semibold tracking-tight text-[#082B66]">
+                                                                            {course.admissionNumber}
+                                                                        </dd>
+                                                                    </div>
+                                                                )}
+                                                            </dl>
                                                         )}
                                                     </div>
                                                 </div>
