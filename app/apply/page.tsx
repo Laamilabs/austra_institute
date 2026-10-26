@@ -371,18 +371,12 @@ export default function ApplyPage() {
                         Apply to Austra Training Institute
                     </h1>
 
-                    <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#D5DCE8] md:text-lg">
-                        Start your application for a course in Eldoret. Choose your
-                        programme, add your details and education background, then submit
-                        to receive an application number you can use to track your progress.
-                    </p>
-
                     <p className="mt-3 text-sm text-[#D5DCE8]">
                         Fields marked with <span className="font-semibold text-orange-400">*</span> are required.
                         Your application details are used to review your admission.
                     </p>
 
-                 <div className="mt-8 hidden max-w-4xl grid-cols-1 gap-3 sm:grid sm:grid-cols-3 sm:gap-4">
+                    <div className="mt-8 hidden max-w-4xl grid-cols-1 gap-3 sm:grid sm:grid-cols-3 sm:gap-4">
                         <Step
                             n="1"
                             title="Choose a course"
