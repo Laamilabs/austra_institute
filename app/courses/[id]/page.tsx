@@ -85,6 +85,7 @@ export default async function CourseDetailPage({ params }: PageProps) {
   const courseJsonLd = {
     "@context": "https://schema.org",
     "@type": "Course",
+    "@id": `${SITE_URL}/courses/${encodeURIComponent(id)}#course`,
     name: course.name,
     courseCode: course.courseCode,
     description:
@@ -108,12 +109,25 @@ export default async function CourseDetailPage({ params }: PageProps) {
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "@id": `${SITE_URL}/courses/${encodeURIComponent(id)}#breadcrumb`,
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Courses", item: `${SITE_URL}/courses` },
       { "@type": "ListItem", position: 2, name: course.name, item: `${SITE_URL}/courses/${encodeURIComponent(id)}` },
     ],
   };
 
+  const webPageJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${SITE_URL}/courses/${encodeURIComponent(id)}#webpage`,
+    url: `${SITE_URL}/courses/${encodeURIComponent(id)}`,
+    name: `${course.name} (${course.courseCode}) | Austra Training Institute`,
+    description: plainText(course.description) || `${course.name} at Austra Training Institute in Eldoret, Kenya.`,
+    inLanguage: "en-KE",
+    mainEntity: { "@id": `${SITE_URL}/courses/${encodeURIComponent(id)}#course` },
+    breadcrumb: { "@id": `${SITE_URL}/courses/${encodeURIComponent(id)}#breadcrumb` },
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+  };
   return (
     <>
       <script
@@ -123,6 +137,10 @@ export default async function CourseDetailPage({ params }: PageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, "\\u003c") }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd).replace(/</g, "\\u003c") }}
       />
       <CourseDetailClient courseId={id} initialCourse={course} />
     </>

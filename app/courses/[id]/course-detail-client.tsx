@@ -127,13 +127,13 @@ export default function CourseDetailClient({
                             <button
                                 type="button"
                                 onClick={() => setRetryCount((count) => count + 1)}
-                                className="rounded-xl bg-[#0B1E3D] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#18365f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-2"
+                                className="rounded-sm bg-[#0B1E3D] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#18365f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-2"
                             >
                                 Try Again
                             </button>
                             <Link
                                 href="/courses"
-                                className="rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-2"
+                                className="rounded-sm border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-2"
                             >
                                 Back to Courses
                             </Link>
@@ -145,74 +145,80 @@ export default function CourseDetailClient({
             {/* Course Detail */}
             {!loading && !error && course && (
                 <>
-                    {/* Hero */}
-                    <div className="cd-fade-in border-b-2 border-orange-400 bg-[#0B1E3D]">
-                        <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 md:px-8 md:py-14">
-                            {/* Breadcrumb */}
-                            <nav aria-label="Breadcrumb" className="mb-8 flex flex-wrap items-center gap-2 text-sm text-[#D5DCE8]">
-                                <Link
-                                    href="/courses"
-                                    className="transition-colors hover:text-orange-400"
-                                >
+                    {/* Course hero */}
+                    <header className="cd-fade-in relative isolate overflow-hidden border-b-4 border-orange-400 bg-[#0B1E3D] text-white">
+                        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(ellipse_at_85%_25%,rgba(249,115,22,0.18),transparent_35%),linear-gradient(120deg,#0B1E3D_0%,#10294D_60%,#0B1E3D_100%)]" />
+                        <div aria-hidden="true" className="absolute -right-28 top-16 hidden h-[34rem] w-[34rem] rounded-full border border-white/10 md:block">
+                            <div className="absolute inset-8 rounded-full border border-white/10" />
+                            <div className="absolute inset-20 rounded-full border border-white/10" />
+                        </div>
+                        <div className="relative mx-auto max-w-7xl px-5 py-9 sm:px-8 md:py-14 lg:px-10">
+                            <nav aria-label="Breadcrumb" className="mb-10 flex flex-wrap items-center gap-2 text-sm text-slate-300">
+                                <Link href="/courses" className="transition-colors hover:text-orange-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400">
                                     Courses
                                 </Link>
-
-                                <span>/</span>
-
+                                <span aria-hidden="true" className="text-slate-500">/</span>
                                 {course.department?.name && (
                                     <>
                                         <span>{course.department.name}</span>
-                                        <span>/</span>
+                                        <span aria-hidden="true" className="text-slate-500">/</span>
                                     </>
                                 )}
-
-                                <span className="font-medium text-orange-400">
-                                    {course.courseCode}
-                                </span>
+                                <span className="font-medium text-orange-300">{course.courseCode}</span>
                             </nav>
 
-                            {/* Badges */}
-                            <div className="flex flex-wrap items-center gap-2">
-                                <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-bold tracking-wide text-white">
+                            <p className="text-xs font-bold uppercase tracking-[0.2em] text-orange-300">
+                                Austra Training Institute <span className="px-1 text-white/50">·</span> Eldoret, Kenya
+                            </p>
+                            <div className="mt-5 flex flex-wrap items-center gap-2">
+                                <span className="rounded-sm border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-semibold tracking-wide text-white">
                                     {course.courseCode}
                                 </span>
-
-                                <span className="rounded-full bg-orange-400 px-3 py-1.5 text-xs font-semibold text-[#0B1E3D]">
+                                <span className="rounded-sm bg-orange-400 px-3.5 py-1.5 text-xs font-bold text-[#0B1E3D]">
                                     {course.level}
                                 </span>
-
                                 {course.featured && (
-                                    <span className="rounded-full border border-orange-400/40 bg-orange-400/10 px-3 py-1.5 text-xs font-medium text-orange-300">
-                                        Featured Course
+                                    <span className="rounded-sm border border-orange-300/40 bg-orange-300/10 px-3.5 py-1.5 text-xs font-semibold text-orange-200">
+                                        Featured course
                                     </span>
                                 )}
                             </div>
-
-                            {/* Title */}
-                            <h1 className="mt-5 max-w-4xl text-3xl font-bold leading-[1.08] tracking-[-0.025em] text-white md:text-5xl">
+                            <h1 className="mt-6 max-w-5xl text-4xl font-bold leading-[1.04] tracking-[-0.035em] text-white sm:text-5xl md:text-6xl">
                                 {course.name}
                             </h1>
-
-                            {/* Department */}
-                            {course.department?.name && (
-                                <p className="mt-3 flex flex-col gap-1 text-sm text-[#AEB9CC] md:flex-row">
-                                    Offered by{" "}
-                                    <span className="font-medium text-white underline decoration-orange-400 underline-offset-4">
-                                        The School of {course.department.name}
-                                    </span>
-                                </p>
-                            )}
+                            <p className="mt-5 max-w-2xl text-base leading-relaxed text-slate-200 md:text-lg">
+                                {course.department?.name
+                                    ? `Offered by the School of ${course.department.name}. Explore the course details and entry requirements below.`
+                                    : "Explore the course details and entry requirements below."}
+                            </p>
                         </div>
-                    </div>
-
-                    {/* Body */}
-                    <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 md:px-8 md:py-12">
-                        <div className="grid gap-8 lg:grid-cols-3">
+                    </header>
+                    {/* Course snapshot and details */}
+                    <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 md:px-8 md:pb-16">
+                        <section aria-label="Course at a glance" className="relative z-10 -mt-5 grid grid-cols-2 overflow-hidden rounded-sm border border-slate-200 bg-white shadow-[0_18px_50px_-32px_rgba(15,23,42,0.45)] sm:grid-cols-4">
+                            <div className="border-b border-r border-slate-100 p-4 sm:border-b-0 sm:p-5">
+                                <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-500">Course code</p>
+                                <p className="mt-2 text-base font-bold text-[#0B1E3D]">{course.courseCode}</p>
+                            </div>
+                            <div className="border-b border-slate-100 p-4 sm:border-b-0 sm:border-r sm:p-5">
+                                <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-500">Level</p>
+                                <p className="mt-2 text-base font-bold text-[#0B1E3D]">{course.level}</p>
+                            </div>
+                            <div className="border-r border-slate-100 p-4 sm:p-5">
+                                <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-500">School</p>
+                                <p className="mt-2 text-base font-bold text-[#0B1E3D]">{course.department?.name || "Austra Institute"}</p>
+                            </div>
+                            <div className="p-4 sm:p-5">
+                                <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-500">Duration</p>
+                                <p className="mt-2 text-base font-bold text-[#0B1E3D]">{course.duration || "Contact admissions"}</p>
+                            </div>
+                        </section>
+                        <div className="mt-8 grid gap-6 lg:grid-cols-3 lg:gap-8">
                             {/* Main Content */}
                             <div className="order-2 space-y-6 lg:order-1 lg:col-span-2">
                                 {/* Prerequisites Section */}
                                 {course.prerequisites && (
-                                    <section className="cd-fade-up rounded-2xl border border-[#E2E5EA] border-t-4 border-t-[#0B1E3D] bg-white p-6 shadow-sm md:p-8">
+                                    <section className="cd-fade-up rounded-sm border border-[#E2E5EA] border-t-4 border-t-[#0B1E3D] bg-white p-6 shadow-sm md:p-8">
                                         <h2 className="flex items-center gap-2 text-lg font-bold text-[#0B1E3D]">
                                             <span className="h-2 w-2 bg-orange-400"></span>
                                             Requirements & Prerequisites
@@ -225,7 +231,7 @@ export default function CourseDetailClient({
                                 )}
 
                                 {/* About Section */}
-                                <section className="cd-fade-up rounded-2xl border border-[#E2E5EA] border-t-4 border-t-[#0B1E3D] bg-white p-6 shadow-sm md:p-8">
+                                <section className="cd-fade-up rounded-sm border border-[#E2E5EA] border-t-4 border-t-[#0B1E3D] bg-white p-6 shadow-sm md:p-8">
                                     <h2 className="flex items-center gap-2 text-lg font-bold text-[#0B1E3D]">
                                         <span className="h-2 w-2 bg-orange-400"></span>
                                         About This Course
@@ -247,65 +253,19 @@ export default function CourseDetailClient({
                             {/* Sidebar / CTA */}
                             <aside className="order-1 lg:order-2 lg:col-span-1">
                                 <div className="cd-fade-up flex flex-col space-y-4 pr-1 lg:sticky lg:top-28">
-                                    {/* Course Overview Card */}
-                                    <section className="rounded-2xl border border-[#E2E5EA] border-t-4 border-t-orange-400 bg-white p-6 shadow-sm">
-                                        <h2 className="flex items-center gap-2 text-base font-bold text-[#0B1E3D]">
-                                            
-                                            Course details
-                                        </h2>
-
-                                        <dl className="mt-4 grid grid-cols-2 gap-3">
-                                            <div className="rounded-xl border border-slate-200 bg-slate-50 p-3.5">
-                                                <dt className="text-[10px] font-medium uppercase tracking-wide text-[#7C8AA3]">
-                                                    Course Code
-                                                </dt>
-                                                <dd className="mt-0.5 text-sm font-bold text-[#0B1E3D]">
-                                                    {course.courseCode}
-                                                </dd>
-                                            </div>
-
-                                            <div className="rounded-xl border border-slate-200 bg-slate-50 p-3.5">
-                                                <dt className="text-[10px] font-medium uppercase tracking-wide text-[#7C8AA3]">
-                                                    Level
-                                                </dt>
-                                                <dd className="mt-0.5 text-sm font-bold text-[#0B1E3D]">
-                                                    {course.level}
-                                                </dd>
-                                            </div>
-
-                                            <div className="rounded-xl border border-slate-200 bg-slate-50 p-3.5">
-                                                <dt className="text-[10px] font-medium uppercase tracking-wide text-[#7C8AA3]">
-                                                    Department
-                                                </dt>
-                                                <dd className="mt-0.5 text-sm font-bold text-[#0B1E3D]">
-                                                    {course.department?.name || "Unassigned"}
-                                                </dd>
-                                            </div>
-
-                                            <div className="rounded-xl border border-slate-200 bg-slate-50 p-3.5">
-                                                <dt className="text-[10px] font-medium uppercase tracking-wide text-[#7C8AA3]">
-                                                    Duration
-                                                </dt>
-                                                <dd className="mt-0.5 text-sm font-bold text-[#0B1E3D]">
-                                                    {course.duration || "N/A"}
-                                                </dd>
-                                            </div>
-                                        </dl>
-                                    </section>
-
                                     {/* Action Card */}
-                                    <div className="rounded-2xl border border-[#E2E5EA] border-t-4 border-t-orange-400 bg-white p-6 shadow-sm">
-                                        <h3 className="text-base font-bold text-[#0B1E3D]">
+                                    <div className="rounded-sm border border-[#18365f] bg-gradient-to-br from-[#10294D] to-[#0B1E3D] p-6 text-white shadow-[0_20px_60px_-28px_rgba(11,30,61,0.65)]">
+                                        <h3 className="text-xl font-bold tracking-tight text-white">
                                             Ready to apply?
                                         </h3>
 
-                                        <p className="mt-2 text-sm leading-relaxed text-[#5B6472]">
+                                        <p className="mt-2 text-sm leading-relaxed text-slate-200">
                                             Start your online application for this course. We’ll preselect it on the form. Contact admissions on WhatsApp with questions about schedules or entry requirements.
                                         </p>
 
                                         <Link
                                             href={`/apply?course=${encodeURIComponent(course._id)}`}
-                                            className="mt-5 flex w-full items-center justify-center rounded-xl bg-orange-400 px-4 py-3 text-sm font-bold text-[#0B1E3D] transition-colors hover:bg-orange-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B1E3D] focus-visible:ring-offset-2 active:scale-[0.99]"
+                                            className="mt-6 flex w-full items-center justify-center rounded-sm bg-orange-400 px-4 py-3.5 text-sm font-bold text-[#0B1E3D] shadow-lg shadow-black/15 transition-colors hover:bg-orange-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B1E3D] active:scale-[0.99]"
                                         >
                                             Enroll now
                                         </Link>
@@ -314,7 +274,7 @@ export default function CourseDetailClient({
                                             href={whatsappUrl}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="mt-2.5 flex w-full items-center justify-center gap-2 rounded-[3px] border border-[#0B1E3D] bg-white px-4 py-2.5 text-sm font-semibold text-[#0B1E3D] transition-all hover:bg-[#0B1E3D] hover:text-white"
+                                            className="mt-3 flex w-full items-center justify-center gap-2 rounded-sm border border-white/30 bg-white/5 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:border-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B1E3D]"
                                         >
                                             Ask admissions on WhatsApp
                                         </a>
@@ -322,7 +282,7 @@ export default function CourseDetailClient({
 
                                     <Link
                                         href="/courses"
-                                        className="block shrink-0 rounded-xl border border-slate-200 bg-white px-4 py-3 text-center text-sm font-semibold text-[#0B1E3D] shadow-sm transition-colors hover:border-orange-400 hover:text-orange-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-2"
+                                        className="block shrink-0 rounded-sm border border-slate-200 bg-white px-4 py-3 text-center text-sm font-semibold text-[#0B1E3D] shadow-sm transition-colors hover:border-orange-400 hover:text-orange-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-2"
                                     >
                                         &larr; Back to all courses
                                     </Link>
