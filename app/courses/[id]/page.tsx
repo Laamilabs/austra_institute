@@ -105,11 +105,24 @@ export default async function CourseDetailPage({ params }: PageProps) {
     url: `${SITE_URL}/courses/${encodeURIComponent(id)}`,
   };
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Courses", item: `${SITE_URL}/courses` },
+      { "@type": "ListItem", position: 2, name: course.name, item: `${SITE_URL}/courses/${encodeURIComponent(id)}` },
+    ],
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(courseJsonLd).replace(/</g, "\\u003c") }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, "\\u003c") }}
       />
       <CourseDetailClient courseId={id} initialCourse={course} />
     </>

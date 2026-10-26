@@ -14,6 +14,7 @@ export default function CourseDetailClient({
     const [course, setCourse] = useState<Course | null>(initialCourse);
     const [loading, setLoading] = useState(!initialCourse);
     const [error, setError] = useState<string | null>(null);
+    const [retryCount, setRetryCount] = useState(0);
 
     useEffect(() => {
         if (!courseId) return;
@@ -39,7 +40,7 @@ export default function CourseDetailClient({
         };
 
         loadCourse();
-    }, [courseId, initialCourse]);
+    }, [courseId, initialCourse, retryCount]);
 
     // Construct WhatsApp message dynamically
     const whatsappNumber = "254703710401"; // Formatted with country code
@@ -51,7 +52,7 @@ export default function CourseDetailClient({
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
     return (
-        <main className="min-h-screen bg-[#F5F6F8]">
+        <main aria-busy={loading} className="min-h-screen bg-slate-50">
             <style>{`
                 @keyframes fadeIn {
                     from { opacity: 0; }
@@ -101,35 +102,38 @@ export default function CourseDetailClient({
 
             {/* Loading */}
             {loading && (
-                <div className="mx-auto max-w-6xl px-6 py-20 md:px-8">
-                    <div className="rounded-2xl border border-[#E2E5EA] border-t-4 border-t-orange-400 bg-white p-12 text-center shadow-sm">
-                        <div className="mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-4 border-[#E2E5EA] border-t-orange-400" />
-                        <p className="text-sm font-medium text-[#0B1E3D]">
-                            Loading course details...
-                        </p>
+                <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 md:px-8 md:py-14">
+                    <div role="status" className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-9">
+                        <span className="text-sm font-semibold text-[#0B1E3D]">Loading course details…</span>
+                        <div aria-hidden="true" className="mt-6 grid gap-5 lg:grid-cols-3">
+                            <div className="space-y-4 lg:col-span-2">
+                                <div className="h-40 rounded-2xl bg-slate-100" />
+                                <div className="h-56 rounded-2xl bg-slate-100" />
+                            </div>
+                            <div className="h-72 rounded-2xl bg-slate-100" />
+                        </div>
                     </div>
                 </div>
             )}
-
             {/* Error */}
             {!loading && error && (
-                <div className="mx-auto max-w-6xl px-6 py-20 md:px-8">
+                <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 md:px-8 md:py-16">
                     <div className="rounded-2xl border border-red-200 border-t-4 border-t-red-600 bg-red-50 p-6 shadow-sm">
-                        <h2 className="font-semibold text-red-800">
+                        <h2 className="font-semibold text-[#0B1E3D]">
                             Unable to load course
                         </h2>
-                        <p className="mt-1 text-sm text-red-600">{error}</p>
+                        <p className="mt-1 text-sm leading-relaxed text-slate-600">{error}</p>
                         <div className="mt-4 flex gap-3">
                             <button
                                 type="button"
-                                onClick={() => window.location.reload()}
-                                className="rounded-[3px] bg-red-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-red-700"
+                                onClick={() => setRetryCount((count) => count + 1)}
+                                className="rounded-xl bg-[#0B1E3D] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#18365f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-2"
                             >
                                 Try Again
                             </button>
                             <Link
                                 href="/courses"
-                                className="rounded-[3px] border border-red-300 bg-white px-4 py-2 text-sm font-medium text-red-700 transition-colors hover:bg-red-50"
+                                className="rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-2"
                             >
                                 Back to Courses
                             </Link>
@@ -143,9 +147,9 @@ export default function CourseDetailClient({
                 <>
                     {/* Hero */}
                     <div className="cd-fade-in border-b-2 border-orange-400 bg-[#0B1E3D]">
-                        <div className="mx-auto max-w-6xl px-6 py-12 md:px-8 md:py-16">
+                        <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 md:px-8 md:py-14">
                             {/* Breadcrumb */}
-                            <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 pt-8 text-sm text-[#D5DCE8] md:pt-12">
+                            <nav aria-label="Breadcrumb" className="mb-8 flex flex-wrap items-center gap-2 text-sm text-[#D5DCE8]">
                                 <Link
                                     href="/courses"
                                     className="transition-colors hover:text-orange-400"
@@ -169,23 +173,23 @@ export default function CourseDetailClient({
 
                             {/* Badges */}
                             <div className="flex flex-wrap items-center gap-2">
-                                <span className="rounded-[3px] border border-white/10 bg-[#102544] px-2.5 py-1 text-xs font-bold tracking-wide text-white">
+                                <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-bold tracking-wide text-white">
                                     {course.courseCode}
                                 </span>
 
-                                <span className="rounded-[3px] bg-orange-400 px-2.5 py-1 text-xs font-semibold text-[#0B1E3D]">
+                                <span className="rounded-full bg-orange-400 px-3 py-1.5 text-xs font-semibold text-[#0B1E3D]">
                                     {course.level}
                                 </span>
 
                                 {course.featured && (
-                                    <span className="rounded-[3px] border border-orange-400/40 bg-orange-400/10 px-2.5 py-1 text-xs font-medium text-orange-400">
+                                    <span className="rounded-full border border-orange-400/40 bg-orange-400/10 px-3 py-1.5 text-xs font-medium text-orange-300">
                                         Featured Course
                                     </span>
                                 )}
                             </div>
 
                             {/* Title */}
-                            <h1 className="mt-5 max-w-4xl text-3xl font-bold leading-tight tracking-tight text-white md:text-5xl">
+                            <h1 className="mt-5 max-w-4xl text-3xl font-bold leading-[1.08] tracking-[-0.025em] text-white md:text-5xl">
                                 {course.name}
                             </h1>
 
@@ -205,7 +209,7 @@ export default function CourseDetailClient({
                     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 md:px-8 md:py-12">
                         <div className="grid gap-8 lg:grid-cols-3">
                             {/* Main Content */}
-                            <div className="space-y-6 lg:col-span-2">
+                            <div className="order-2 space-y-6 lg:order-1 lg:col-span-2">
                                 {/* Prerequisites Section */}
                                 {course.prerequisites && (
                                     <section className="cd-fade-up rounded-2xl border border-[#E2E5EA] border-t-4 border-t-[#0B1E3D] bg-white p-6 shadow-sm md:p-8">
@@ -229,7 +233,7 @@ export default function CourseDetailClient({
 
                                     {course.description ? (
                                         <div
-                                            className="course-description-content mt-4 text-sm text-[#5B6472]"
+                                            className="course-description-content mt-5 text-base leading-relaxed text-[#4B5563]"
                                             dangerouslySetInnerHTML={{ __html: course.description }}
                                         />
                                     ) : (
@@ -241,17 +245,17 @@ export default function CourseDetailClient({
                             </div>
 
                             {/* Sidebar / CTA */}
-                            <aside className="lg:col-span-1">
-                                <div className="cd-fade-up flex flex-col space-y-4 lg:sticky lg:top-28 lg:max-h-[calc(100vh-8rem)] overflow-y-auto pr-1">
+                            <aside className="order-1 lg:order-2 lg:col-span-1">
+                                <div className="cd-fade-up flex flex-col space-y-4 pr-1 lg:sticky lg:top-28">
                                     {/* Course Overview Card */}
                                     <section className="rounded-2xl border border-[#E2E5EA] border-t-4 border-t-orange-400 bg-white p-6 shadow-sm">
                                         <h2 className="flex items-center gap-2 text-base font-bold text-[#0B1E3D]">
                                             
-                                            Course Overview
+                                            Course details
                                         </h2>
 
                                         <dl className="mt-4 grid grid-cols-2 gap-3">
-                                            <div className="rounded-[3px] border border-[#E2E5EA] bg-[#F8FAFC] p-3">
+                                            <div className="rounded-xl border border-slate-200 bg-slate-50 p-3.5">
                                                 <dt className="text-[10px] font-medium uppercase tracking-wide text-[#7C8AA3]">
                                                     Course Code
                                                 </dt>
@@ -260,7 +264,7 @@ export default function CourseDetailClient({
                                                 </dd>
                                             </div>
 
-                                            <div className="rounded-[3px] border border-[#E2E5EA] bg-[#F8FAFC] p-3">
+                                            <div className="rounded-xl border border-slate-200 bg-slate-50 p-3.5">
                                                 <dt className="text-[10px] font-medium uppercase tracking-wide text-[#7C8AA3]">
                                                     Level
                                                 </dt>
@@ -269,7 +273,7 @@ export default function CourseDetailClient({
                                                 </dd>
                                             </div>
 
-                                            <div className="rounded-[3px] border border-[#E2E5EA] bg-[#F8FAFC] p-3">
+                                            <div className="rounded-xl border border-slate-200 bg-slate-50 p-3.5">
                                                 <dt className="text-[10px] font-medium uppercase tracking-wide text-[#7C8AA3]">
                                                     Department
                                                 </dt>
@@ -278,7 +282,7 @@ export default function CourseDetailClient({
                                                 </dd>
                                             </div>
 
-                                            <div className="rounded-[3px] border border-[#E2E5EA] bg-[#F8FAFC] p-3">
+                                            <div className="rounded-xl border border-slate-200 bg-slate-50 p-3.5">
                                                 <dt className="text-[10px] font-medium uppercase tracking-wide text-[#7C8AA3]">
                                                     Duration
                                                 </dt>
@@ -292,11 +296,11 @@ export default function CourseDetailClient({
                                     {/* Action Card */}
                                     <div className="rounded-2xl border border-[#E2E5EA] border-t-4 border-t-orange-400 bg-white p-6 shadow-sm">
                                         <h3 className="text-base font-bold text-[#0B1E3D]">
-                                            Interested in this course?
+                                            Ready to apply?
                                         </h3>
 
                                         <p className="mt-2 text-sm leading-relaxed text-[#5B6472]">
-                                            Start your online application for this course. We&apos;ll preselect it on the form. Contact admissions on WhatsApp if you have questions about schedules or entry requirements.
+                                            Start your online application for this course. We’ll preselect it on the form. Contact admissions on WhatsApp with questions about schedules or entry requirements.
                                         </p>
 
                                         <Link
@@ -318,7 +322,7 @@ export default function CourseDetailClient({
 
                                     <Link
                                         href="/courses"
-                                        className="block shrink-0 rounded-[3px] border border-[#E2E5EA] bg-white px-4 py-3 text-center text-sm font-semibold text-[#0B1E3D] shadow-sm transition-all hover:border-orange-400 hover:text-orange-500"
+                                        className="block shrink-0 rounded-xl border border-slate-200 bg-white px-4 py-3 text-center text-sm font-semibold text-[#0B1E3D] shadow-sm transition-colors hover:border-orange-400 hover:text-orange-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-2"
                                     >
                                         &larr; Back to all courses
                                     </Link>
