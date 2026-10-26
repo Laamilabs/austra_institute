@@ -125,9 +125,14 @@ export default function ApplyPage() {
             setCoursesError(null);
 
             try {
+                const requestedCourseId = new URLSearchParams(window.location.search).get("course");
                 const list = await courseApi.getAll();
                 if (cancelled) return;
-                setCourses(Array.isArray(list) ? list : []);
+                const availableCourses = Array.isArray(list) ? list : [];
+                setCourses(availableCourses);
+                if (requestedCourseId && availableCourses.some((course) => course._id === requestedCourseId)) {
+                    setForm((previous) => ({ ...previous, course: requestedCourseId }));
+                }
             } catch (err) {
                 if (cancelled) return;
                 console.error("[apply] course fetch failed", err);
