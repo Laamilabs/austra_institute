@@ -364,7 +364,7 @@ export default function ApplyPage() {
                             href="/"
                             className="flex items-center gap-2 text-sm font-semibold tracking-wide text-white"
                         >
-                            <span className="flex h-8 w-8 items-center justify-center rounded-[3px] bg-orange-400 text-xs font-bold text-[#0B1E3D]">
+                            <span className="flex h-8 w-8 items-center justify-center rounded-sm bg-orange-400 text-xs font-bold text-[#0B1E3D]">
                                 ATI
                             </span>
                             <span className="hidden sm:inline">Admissions</span>
@@ -416,7 +416,7 @@ export default function ApplyPage() {
                 {coursesError && (
                     <div
                         role="alert"
-                        className="mb-6 flex items-start gap-3 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900"
+                        className="mb-6 flex items-start gap-3 rounded-sm border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -440,7 +440,7 @@ export default function ApplyPage() {
                 {submitError && (
                     <div
                         role="alert"
-                        className="mb-6 flex items-start gap-3 rounded-xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-800"
+                        className="mb-6 flex items-start gap-3 rounded-sm border border-rose-200 bg-rose-50 p-4 text-sm text-rose-800"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -482,9 +482,9 @@ export default function ApplyPage() {
                             htmlFor={showCourseSummary || isLoadingLinkedCourse ? undefined : "course"}
                         >
                             {showCourseSummary && selectedCourse ? (
-                                <div role="group" aria-label="Selected course details" aria-live="polite" className="flex flex-col gap-4 rounded-2xl border border-[#d9e2ef] bg-gradient-to-br from-white to-slate-50 p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-5">
+                                <div role="group" aria-label="Selected course details" aria-live="polite" className="flex flex-col gap-4 rounded-sm border border-[#d9e2ef] bg-gradient-to-br from-white to-slate-50 p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-5">
                                     <div className="flex min-w-0 items-start gap-3.5">
-                                        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#0B1E3D] text-orange-300">
+                                        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-sm bg-[#0B1E3D] text-orange-300">
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5" aria-hidden="true">
                                                 <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
                                                 <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z" />
@@ -509,13 +509,13 @@ export default function ApplyPage() {
                                     <button
                                         type="button"
                                         onClick={() => setIsChoosingAnotherCourse(true)}
-                                        className="inline-flex shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-[#0B1E3D] transition-colors hover:border-orange-300 hover:bg-orange-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B1E3D] focus-visible:ring-offset-2"
+                                        className="inline-flex shrink-0 items-center justify-center rounded-sm border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-[#0B1E3D] transition-colors hover:border-orange-300 hover:bg-orange-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B1E3D] focus-visible:ring-offset-2"
                                     >
                                         Change course
                                     </button>
                                 </div>
                             ) : isLoadingLinkedCourse ? (
-                                <div role="status" className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-5 text-sm font-medium text-slate-600">
+                                <div role="status" className="rounded-sm border border-slate-200 bg-slate-50 px-4 py-5 text-sm font-medium text-slate-600">
                                     Loading your selected course…
                                 </div>
                             ) : (
@@ -590,7 +590,7 @@ export default function ApplyPage() {
                             </Field>
                         </div>
 
-                        <label className="flex items-start gap-3 rounded-lg border border-slate-200 bg-white p-3">
+                        <label className="flex items-start gap-3 rounded-sm border border-slate-200 bg-white p-3">
                             <input
                                 type="checkbox"
                                 checked={form.isInternational}
@@ -880,7 +880,7 @@ export default function ApplyPage() {
                         <div
                             data-field="declarationAccepted"
                             className={[
-                                "rounded-lg border p-3",
+                                "rounded-sm border p-3",
                                 errors.declarationAccepted
                                     ? "border-rose-300 bg-rose-50"
                                     : "border-slate-200 bg-white",
@@ -913,14 +913,14 @@ export default function ApplyPage() {
                     <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-end">
                         <Link
                             href="/"
-                            className="inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50"
+                            className="inline-flex items-center justify-center rounded-sm border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50"
                         >
                             Cancel
                         </Link>
                         <button
                             type="submit"
                             disabled={submitting || coursesLoading || courses.length === 0}
-                            className="inline-flex items-center justify-center gap-2 rounded-lg bg-orange-400 px-4 py-2 text-sm font-semibold text-[#082B66] shadow-sm transition hover:bg-orange-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#082B66] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
+                            className="inline-flex items-center justify-center gap-2 rounded-sm bg-orange-400 px-4 py-2 text-sm font-semibold text-[#082B66] shadow-sm transition hover:bg-orange-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#082B66] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
                         >
                             {submitting && (
                                 <svg
@@ -968,9 +968,9 @@ function Step({
     body: string;
 }) {
     return (
-        <div className="rounded-xl border border-white/15 bg-white/[0.06] p-4 backdrop-blur-sm">
+        <div className="rounded-sm border border-white/15 bg-white/[0.06] p-4 backdrop-blur-sm">
             <div className="flex items-center gap-2.5">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-[3px] bg-orange-400 text-[11px] font-bold text-[#0B1E3D]">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-sm bg-orange-400 text-[11px] font-bold text-[#0B1E3D]">
                     {n}
                 </span>
                 <p className="text-sm font-semibold text-white">{title}</p>
@@ -990,7 +990,7 @@ function Section({
     children: ReactNode;
 }) {
     return (
-        <section className="rounded-2xl border border-slate-200/90 bg-white p-5 shadow-[0_8px_28px_-24px_rgba(15,23,42,0.35)] sm:p-7">
+        <section className="rounded-sm border border-slate-200/90 bg-white p-5 shadow-[0_8px_28px_-24px_rgba(15,23,42,0.35)] sm:p-7">
             <header className="mb-5 border-b border-slate-100 pb-4">
                 <h2 className="text-lg font-semibold tracking-tight text-slate-900">{title}</h2>
                 {description && (
@@ -1049,7 +1049,7 @@ function Field({
 
 function inputClass(error?: string) {
     return [
-        "w-full rounded-xl border bg-white px-3.5 py-2.5 text-base text-slate-900 shadow-sm transition-colors",
+        "w-full rounded-sm border bg-white px-3.5 py-2.5 text-base text-slate-900 shadow-sm transition-colors",
         "placeholder-slate-400 focus:outline-none focus:ring-2",
         error
             ? "border-rose-300 focus:border-rose-400 focus:ring-rose-500/20"
@@ -1100,7 +1100,7 @@ function SuccessView({
                             href="/"
                             className="flex items-center gap-2 text-sm font-semibold tracking-wide text-white"
                         >
-                            <span className="flex h-8 w-8 items-center justify-center rounded-[3px] bg-orange-400 text-xs font-bold text-[#0B1E3D]">
+                            <span className="flex h-8 w-8 items-center justify-center rounded-sm bg-orange-400 text-xs font-bold text-[#0B1E3D]">
                                 ATI
                             </span>
                             <span className="hidden sm:inline">Admissions</span>
@@ -1139,9 +1139,9 @@ function SuccessView({
 
             {/* Content ---------------------------------------------------- */}
             <div className="mx-auto max-w-2xl px-4 py-10 sm:px-6 lg:px-8">
-                <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+                <div className="rounded-sm border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
                     {/* Application number */}
-                    <div className="rounded-lg border border-slate-200 bg-slate-50 p-5 text-center">
+                    <div className="rounded-sm border border-slate-200 bg-slate-50 p-5 text-center">
                         <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
                             Your application number
                         </p>
@@ -1152,7 +1152,7 @@ function SuccessView({
                             <button
                                 type="button"
                                 onClick={copyNumber}
-                                className="rounded-md border border-slate-200 bg-white px-2.5 py-1 text-xs font-medium text-slate-600 transition hover:bg-slate-100"
+                                className="rounded-sm border border-slate-200 bg-white px-2.5 py-1 text-xs font-medium text-slate-600 transition hover:bg-slate-100"
                             >
                                 {copied ? "Copied" : "Copy"}
                             </button>
@@ -1203,7 +1203,7 @@ function SuccessView({
                     </dl>
 
                     {/* What happens next */}
-                    <div className="mt-8 rounded-lg border-l-4 border-orange-400 bg-orange-50 p-4">
+                    <div className="mt-8 rounded-sm border-l-4 border-orange-400 bg-orange-50 p-4">
                         <p className="text-sm font-semibold text-slate-900">
                             What happens next?
                         </p>
@@ -1228,13 +1228,13 @@ function SuccessView({
                         <button
                             type="button"
                             onClick={onApplyAgain}
-                            className="inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50"
+                            className="inline-flex items-center justify-center rounded-sm border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50"
                         >
                             Submit another application
                         </button>
                         <Link
                             href="/"
-                            className="inline-flex items-center justify-center rounded-lg bg-orange-400 px-4 py-2 text-sm font-semibold text-[#082B66] shadow-sm transition hover:bg-orange-300"
+                            className="inline-flex items-center justify-center rounded-sm bg-orange-400 px-4 py-2 text-sm font-semibold text-[#082B66] shadow-sm transition hover:bg-orange-300"
                         >
                             Return to home
                         </Link>
