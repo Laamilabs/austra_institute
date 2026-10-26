@@ -357,41 +357,41 @@ export default function ApplyPage() {
                     </div>
                 </div>
 
-                <div className="relative mx-auto max-w-400 px-6 pt-16 pb-12 md:px-8 md:pt-24 md:pb-16">
-                    <p className="text-xs font-medium text-orange-400">
-                        Admissions · Apply online
+                <div className="relative mx-auto max-w-6xl px-6 pt-12 pb-10 md:px-8 md:pt-16 md:pb-14">
+                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-orange-400">
+                        Austra Training Institute · Eldoret, Kenya
                     </p>
 
-                    <h1 className="mt-3 max-w-2xl text-3xl font-bold leading-tight text-white md:text-4xl">
-                        Apply to study with us.
+                    <h1 className="mt-3 max-w-3xl text-3xl font-bold leading-tight tracking-tight text-white md:text-5xl">
+                        Apply to Austra Training Institute
                     </h1>
 
-                    <p className="mt-3 max-w-lg text-sm text-[#AEB9CC] md:text-base">
-                        Complete the form below to submit your application. You&apos;ll
-                        receive an application number on submission — keep it safe so you
-                        can track your application.
+                    <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#D5DCE8] md:text-lg">
+                        Start your application for a course in Eldoret. Choose your
+                        programme, add your details and education background, then submit
+                        to receive an application number you can use to track your progress.
                     </p>
 
-                    <p className="mt-2 text-xs text-[#AEB9CC]">
-                        Fields marked with <span className="text-orange-400">*</span> are
-                        required.
+                    <p className="mt-3 text-sm text-[#D5DCE8]">
+                        Fields marked with <span className="font-semibold text-orange-400">*</span> are required.
+                        Your application details are used to review your admission.
                     </p>
 
-                    <div className="mt-9 grid max-w-2xl grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
+                    <div className="mt-8 grid max-w-4xl grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
                         <Step
                             n="1"
-                            title="Fill the form"
-                            body="Tell us about you, your studies and how you'd like to study."
+                            title="Choose a course"
+                            body="Select your programme, preferred study mode and start date."
                         />
                         <Step
                             n="2"
-                            title="Submit securely"
-                            body="Send your application — it takes less than a few minutes."
+                            title="Add your details"
+                            body="Complete your contact, emergency contact and education details."
                         />
                         <Step
                             n="3"
-                            title="Get your number"
-                            body="Receive an application number to track your progress."
+                            title="Submit and track"
+                            body="Keep the application number shown after successful submission."
                         />
                     </div>
                 </div>
@@ -400,7 +400,7 @@ export default function ApplyPage() {
             {/* ============================================================== */}
             {/* FORM                                                            */}
             {/* ============================================================== */}
-            <div className="mx-auto max-w-400 px-4 py-8 sm:px-6 lg:px-8">
+            <div className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
                 {coursesError && (
                     <div
                         role="alert"
@@ -452,7 +452,7 @@ export default function ApplyPage() {
                     </div>
                 )}
 
-                <form onSubmit={handleSubmit} noValidate className="space-y-6">
+                <form onSubmit={handleSubmit} noValidate className="space-y-5 md:space-y-6">
                     {/* ---------- Course & study ---------------------------------- */}
                     <Section
                         title="Course & study"
@@ -898,7 +898,7 @@ function Step({
     body: string;
 }) {
     return (
-        <div className="rounded-[3px] border border-white/10 bg-white/[0.04] p-3.5 backdrop-blur-sm">
+        <div className="rounded-xl border border-white/15 bg-white/[0.06] p-4 backdrop-blur-sm">
             <div className="flex items-center gap-2.5">
                 <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-[3px] bg-orange-400 text-[11px] font-bold text-[#0B1E3D]">
                     {n}
@@ -920,9 +920,9 @@ function Section({
     children: ReactNode;
 }) {
     return (
-        <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-            <header className="mb-4">
-                <h2 className="text-base font-semibold text-slate-900">{title}</h2>
+        <section className="rounded-2xl border border-slate-200/90 bg-white p-5 shadow-[0_8px_28px_-24px_rgba(15,23,42,0.35)] sm:p-7">
+            <header className="mb-5 border-b border-slate-100 pb-4">
+                <h2 className="text-lg font-semibold tracking-tight text-slate-900">{title}</h2>
                 {description && (
                     <p className="mt-0.5 text-sm text-slate-500">{description}</p>
                 )}
@@ -972,7 +972,7 @@ function Field({
 
 function inputClass(error?: string) {
     return [
-        "w-full rounded-lg border bg-white px-3 py-2 text-sm text-slate-900 shadow-sm",
+        "w-full rounded-xl border bg-white px-3.5 py-2.5 text-base text-slate-900 shadow-sm transition-colors",
         "placeholder-slate-400 focus:outline-none focus:ring-2",
         error
             ? "border-rose-300 focus:border-rose-400 focus:ring-rose-500/20"
