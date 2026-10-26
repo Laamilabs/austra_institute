@@ -110,6 +110,8 @@ export default function ApplyPage() {
     const [courses, setCourses] = useState<Course[]>([]);
     const [coursesLoading, setCoursesLoading] = useState(true);
     const [coursesError, setCoursesError] = useState<string | null>(null);
+    const [selectedCourseFromLinkId, setSelectedCourseFromLinkId] = useState<string | null>(null);
+    const [isChoosingAnotherCourse, setIsChoosingAnotherCourse] = useState(false);
 
     const [form, setForm] = useState<FormState>(INITIAL_FORM);
     const [errors, setErrors] = useState<Errors>({});
@@ -126,12 +128,15 @@ export default function ApplyPage() {
 
             try {
                 const requestedCourseId = new URLSearchParams(window.location.search).get("course");
+                if (requestedCourseId) setSelectedCourseFromLinkId(requestedCourseId);
                 const list = await courseApi.getAll();
                 if (cancelled) return;
                 const availableCourses = Array.isArray(list) ? list : [];
                 setCourses(availableCourses);
                 if (requestedCourseId && availableCourses.some((course) => course._id === requestedCourseId)) {
                     setForm((previous) => ({ ...previous, course: requestedCourseId }));
+                } else if (requestedCourseId) {
+                    setSelectedCourseFromLinkId(null);
                 }
             } catch (err) {
                 if (cancelled) return;
@@ -329,6 +334,14 @@ export default function ApplyPage() {
 
     const today = new Date().toISOString().split("T")[0];
 
+    const selectedCourse = courses.find((course) => course._id === form.course) ?? null;
+    const showCourseSummary = Boolean(
+        selectedCourseFromLinkId && selectedCourse && !isChoosingAnotherCourse,
+    );
+    const isLoadingLinkedCourse = Boolean(
+        selectedCourseFromLinkId && coursesLoading && !selectedCourse,
+    );
+
     return (
         <main className="min-h-screen bg-slate-50">
             {/* ============================================================== */}
@@ -455,23 +468,81 @@ export default function ApplyPage() {
                     {/* ---------- Course & study ---------------------------------- */}
                     <Section
                         title="Course & study"
-                        description="Choose the course you are applying for and how you would like to study."
+                        description={
+                            showCourseSummary
+                                ? "Your course from the course details page is selected. Change it here if needed."
+                                : "Choose the course you are applying for and how you would like to study."
+                        }
                     >
                         <Field
                             label="Course"
                             required
                             error={errors.course}
                             dataField="course"
-                            htmlFor="course"
+                            htmlFor={showCourseSummary || isLoadingLinkedCourse ? undefined : "course"}
                         >
-                            <CoursePicker
-                                courses={courses}
-                                value={form.course}
-                                onChange={(id) => setField("course", id)}
-                                loading={coursesLoading}
-                                error={coursesError}
-                                placeholder="Search by code, name or department…"
-                            />
+                            {showCourseSummary && selectedCourse ? (
+                                <div role="group" aria-label="Selected course details" aria-live="polite" className="flex flex-col gap-4 rounded-2xl border border-[#d9e2ef] bg-gradient-to-br from-white to-slate-50 p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-5">
+                                    <div className="flex min-w-0 items-start gap-3.5">
+                                        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#0B1E3D] text-orange-300">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5" aria-hidden="true">
+                                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z" />
+                                                <path d="m9 10 2 2 4-4" />
+                                            </svg>
+                                        </span>
+                                        <div className="min-w-0">
+                                            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
+                                                Selected course
+                                            </p>
+                                            <p className="mt-1 text-base font-bold leading-snug text-[#0B1E3D] sm:text-lg">
+                                                {selectedCourse.name}
+                                            </p>
+                                            <p className="mt-1 text-sm text-slate-600">
+                                                {selectedCourse.courseCode} <span aria-hidden="true">·</span> {selectedCourse.level}
+                                                {selectedCourse.department?.name && (
+                                                    <> <span aria-hidden="true">·</span> {selectedCourse.department.name}</>
+                                                )}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        onClick={() => setIsChoosingAnotherCourse(true)}
+                                        className="inline-flex shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-[#0B1E3D] transition-colors hover:border-orange-300 hover:bg-orange-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B1E3D] focus-visible:ring-offset-2"
+                                    >
+                                        Change course
+                                    </button>
+                                </div>
+                            ) : isLoadingLinkedCourse ? (
+                                <div role="status" className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-5 text-sm font-medium text-slate-600">
+                                    Loading your selected course…
+                                </div>
+                            ) : (
+                                <>
+                                    <CoursePicker
+                                        courses={courses}
+                                        value={form.course}
+                                        onChange={(id) => {
+                                            setField("course", id);
+                                            setSelectedCourseFromLinkId(id || null);
+                                            setIsChoosingAnotherCourse(false);
+                                        }}
+                                        loading={coursesLoading}
+                                        error={coursesError}
+                                        placeholder="Search by code, name or department…"
+                                    />
+                                    {isChoosingAnotherCourse && selectedCourse && (
+                                        <button
+                                            type="button"
+                                            onClick={() => setIsChoosingAnotherCourse(false)}
+                                            className="mt-2 text-sm font-medium text-[#0B1E3D] underline decoration-orange-400 underline-offset-4 hover:text-orange-700"
+                                        >
+                                            Keep {selectedCourse.courseCode}
+                                        </button>
+                                    )}
+                                </>
+                            )}
                         </Field>
 
                         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -953,10 +1024,17 @@ function Field({
     return (
         <div className={className} data-field={dataField}>
             <div className="mb-1 flex items-baseline justify-between">
-                <label htmlFor={htmlFor} className="text-sm font-medium text-slate-700">
-                    {label}
-                    {required && <span className="ml-0.5 text-rose-500">*</span>}
-                </label>
+                {htmlFor ? (
+                    <label htmlFor={htmlFor} className="text-sm font-medium text-slate-700">
+                        {label}
+                        {required && <span className="ml-0.5 text-rose-500">*</span>}
+                    </label>
+                ) : (
+                    <span className="text-sm font-medium text-slate-700">
+                        {label}
+                        {required && <span className="ml-0.5 text-rose-500">*</span>}
+                    </span>
+                )}
                 {hint && !error && (
                     <span className="text-xs text-slate-400">{hint}</span>
                 )}
