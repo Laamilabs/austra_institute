@@ -382,7 +382,7 @@ export default function ApplyPage() {
                         Your application details are used to review your admission.
                     </p>
 
-                    <div className="mt-8 grid max-w-4xl grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
+                 <div className="mt-8 hidden max-w-4xl grid-cols-1 gap-3 sm:grid sm:grid-cols-3 sm:gap-4">
                         <Step
                             n="1"
                             title="Choose a course"
