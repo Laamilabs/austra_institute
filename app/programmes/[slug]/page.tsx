@@ -177,7 +177,10 @@ export default async function ProgrammePage({ params }: PageProps) {
                 <p className="font-mono text-xs font-bold tracking-wide text-orange-700">{course.courseCode}</p>
                 <h3 className="mt-2 text-lg font-bold text-[#0B1F3A]"><Link className="hover:text-orange-600" href={`/courses/${course._id}`}>{course.name}</Link></h3>
                 <p className="mt-2 text-sm text-slate-600">{[course.department?.name, course.level, course.duration].filter(Boolean).join(" · ")}</p>
-                <Link className="mt-auto pt-5 text-sm font-bold text-[#0B1F3A] underline decoration-orange-400 underline-offset-4" href={`/apply?course=${encodeURIComponent(course._id)}`}>Apply for this course</Link>
+                <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-3 pt-5">
+                  <Link className="text-sm font-bold text-[#0B1F3A] underline decoration-orange-400 underline-offset-4 hover:text-orange-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500" href={`/courses/${encodeURIComponent(course._id)}`}>Learn more · course details</Link>
+                  <Link className="text-sm font-bold text-[#0B1F3A] underline decoration-orange-400 underline-offset-4 hover:text-orange-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500" href={`/apply?course=${encodeURIComponent(course._id)}`}>Apply for this course</Link>
+                </div>
               </li>
             ))}
           </ul>
@@ -189,8 +192,7 @@ export default async function ProgrammePage({ params }: PageProps) {
         )}
 
         <p className="mt-8 max-w-3xl text-sm leading-6 text-slate-600">
-          Visit the main campus at {INSTITUTE_CONTACT.campus}. Contact admissions to confirm course availability, fees, entry requirements and the next intake before applying.
-        </p>
+          Visit the main campus at {INSTITUTE_CONTACT.campus}. </p>
       </section>
     </main>
   );
