@@ -48,19 +48,20 @@ export default function TVETCertification() {
                         >
                             {/* Accreditation Label */}
                             <span className="mb-3 inline-block w-full rounded-sm text-center sm:text-start bg-orange-50 px-3 py-1 text-sm font-bold tracking-wide text-orange-600 sm:text-base">
-                                TVET ACCREDITED
+                                Practical training
                             </span>
 
                             {/* Heading */}
                             <h2 className="mb-3 text-2xl font-bold tracking-tight text-center sm:text-start text-[#0B1F3A] sm:text-3xl" style={{ fontFamily: "var(--font-nunito)" }}>
-                                Recognised. Accredited. Career-focused.
+                                Career-focused learning.
                             </h2>
 
                             {/* Description */}
                             <p className="max-w-xl text-sm font-normal leading-7 text-center sm:text-start text-[#0B1F3A] sm:text-base">
-                                Austra Training Institute is TVET accredited, offering
-                                recognised vocational training designed to prepare students
-                                for real careers.
+                                Explore practical vocational and professional courses in
+                                Eldoret. Check the course listing for current programme
+                                details and confirm awarding or accreditation information
+                                with admissions.
                             </p>
                         </div>
 

@@ -2,17 +2,21 @@ import type { MetadataRoute } from "next";
 import type { Course } from "@/lib/api/course";
 import type { Department } from "@/lib/api/department";
 import { getArticles } from "@/lib/sanity";
-
-const SITE_URL = "https://austratraininginstitute.co.ke";
+import { SITE_URL } from "@/lib/site";
 
 const staticRoutes = [
   "",
   "/about",
   "/courses",
+  "/programmes/caregiving",
+  "/programmes/health-support",
+  "/programmes/ict-short-courses",
+  "/programmes/ai-workplace-automation",
   "/news",
   "/contact",
   "/faqs",
   "/apply",
+  "/library",
   "/prospectus.pdf",
 ];
 

@@ -10,8 +10,8 @@ import "./globals.css";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import FloatingWidgets from "./components/floating-widgets"; // <-- Import added
+import { INSTITUTE_CONTACT, SITE_URL } from "@/lib/site";
 
-const SITE_URL = "https://austratraininginstitute.co.ke";
 const ORGANIZATION_ID = `${SITE_URL}/#organization`;
 const WEBSITE_ID = `${SITE_URL}/#website`;
 const HOMEPAGE_ID = `${SITE_URL}/#webpage`;
@@ -54,12 +54,12 @@ export const metadata: Metadata = {
 
   title: {
     default:
-      "Austra Training Institute Eldoret | German, Caregiving & TVET Courses",
+      "Austra Training Institute Eldoret | TVET, Health & ICT Courses",
     template: "%s | Austra Training Institute",
   },
 
   description:
-    "Looking for a training institute in Eldoret, Kenya? Explore German language classes, caregiving training, nursing aide, ICT, computer packages and IELTS preparation at Austra Training Institute.",
+    "Explore caregiving, nurse aide and health support training, plus computer packages, ICT short courses, cybersecurity and web development at Austra Training Institute in Eldoret, Kenya.",
 
   applicationName: "Austra Training Institute",
 
@@ -77,9 +77,8 @@ export const metadata: Metadata = {
   keywords: [
     "Austra Training Institute",
     "training institutes in Eldoret",
-    "TVET institutes in Eldoret",
-    "TVET colleges in Eldoret",
     "vocational training in Eldoret",
+    "TVET courses in Eldoret",
     "technical training in Eldoret",
     "colleges in Eldoret Kenya",
     "courses in Eldoret",
@@ -96,12 +95,17 @@ export const metadata: Metadata = {
     "caregiving courses in Eldoret",
     "caregiver training in Eldoret",
     "caregiving training in Kenya",
+    "nurse aide courses in Eldoret",
     "caregiver certificate course in Kenya",
     "nursing aide course in Eldoret",
     "healthcare support training in Eldoret",
+    "health services support course in Eldoret",
     "computer courses in Eldoret",
     "ICT training in Eldoret",
     "computer packages in Eldoret",
+    "cybersecurity course in Eldoret",
+    "web development course in Eldoret",
+    "AI workplace automation course in Eldoret",
     "IELTS classes in Eldoret",
     "IELTS preparation in Kenya",
   ],
@@ -129,9 +133,9 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: "Austra Training Institute",
     title:
-      "Austra Training Institute Eldoret | German, Caregiving & TVET Courses",
+      "Austra Training Institute Eldoret | TVET, Health & ICT Courses",
     description:
-      "Find German language classes, caregiving training, nursing aide, ICT, computer packages and IELTS preparation at Austra Training Institute in Eldoret, Kenya.",
+      "Find caregiving, nurse aide, health support and ICT courses at Austra Training Institute in Eldoret, Kenya.",
     images: [
       {
         url: "/og-image.jpg",
@@ -146,9 +150,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "Austra Training Institute | German & Caregiving Courses in Eldoret",
+      "Austra Training Institute | TVET, Health & ICT Courses in Eldoret",
     description:
-      "Explore German language classes, caregiving training and professional courses at Austra Training Institute in Eldoret, Kenya.",
+      "Explore caregiving, health support, ICT and professional courses at Austra Training Institute in Eldoret, Kenya.",
     images: ["/og-image.jpg"],
   },
 
@@ -195,21 +199,20 @@ const jsonLd = {
       ],
       url: SITE_URL,
       description:
-        "Austra Training Institute is based at Komora Center, Tulin Supermarket Building, 4th Floor, Room 415, Eldoret, Uasin Gishu County, Kenya. Its training areas include German language classes, caregiving, nursing aide, ICT, computer packages, IELTS preparation and other professional programmes. Prospective students should confirm current course availability, fees, entry requirements and certification details directly with the institute.",
-      email: "info@austratraininginstitute.co.ke",
-      telephone: "+254703710401",
+      "Austra Training Institute's main campus is at Komora Centre in Eldoret, Kenya. The institute offers career-focused training in caregiving, health support, ICT, computer packages and other professional programmes. Prospective students should confirm current course availability, fees, entry requirements and certification details directly with the institute.",
+      email: INSTITUTE_CONTACT.email,
+      telephone: INSTITUTE_CONTACT.phones.map((phone) => phone.display.replace(/\s/g, "")),
       address: {
         "@type": "PostalAddress",
-        streetAddress:
-          "Komora Center, Tulin Supermarket Building, 4th Floor, Room 415",
+        streetAddress: "Komora Centre",
         addressLocality: "Eldoret",
         addressRegion: "Uasin Gishu County",
         addressCountry: "KE",
       },
       contactPoint: {
         "@type": "ContactPoint",
-        telephone: "+254703710401",
-        email: "info@austratraininginstitute.co.ke",
+        telephone: INSTITUTE_CONTACT.phones.map((phone) => phone.display.replace(/\s/g, "")),
+        email: INSTITUTE_CONTACT.email,
         contactType: "admissions and course enquiries",
         areaServed: "KE",
         availableLanguage: ["English", "Swahili"],
@@ -229,14 +232,14 @@ const jsonLd = {
         },
       ],
       knowsAbout: [
-        "German language classes in Eldoret",
-        "German language proficiency levels A1, A2, B1 and B2",
+        "Caregiving training in Eldoret",
+        "Health Services Support and nurse aide training",
         "Caregiving training",
         "Caregiver skills",
-        "Nursing aide training",
+        "Nurse aide training",
         "Information and communication technology",
         "Computer packages",
-        "IELTS preparation",
+        "Cybersecurity and web development short courses",
         "Professional and vocational training",
         "Career development",
       ],
@@ -255,7 +258,7 @@ const jsonLd = {
       name: "Austra Training Institute",
       alternateName: "Austra Training Institute Eldoret",
       description:
-        "The official website of Austra Training Institute in Eldoret, Kenya, providing information about German classes, caregiving training, professional courses, admissions and student enquiries.",
+      "The official website of Austra Training Institute in Eldoret, Kenya, with information about caregiving, health support, ICT, computer packages, courses and admissions.",
       publisher: {
         "@id": ORGANIZATION_ID,
       },
@@ -267,9 +270,9 @@ const jsonLd = {
       "@id": HOMEPAGE_ID,
       url: SITE_URL,
       name:
-        "Austra Training Institute Eldoret | German, Caregiving & TVET Courses",
+        "Austra Training Institute Eldoret | TVET, Health & ICT Courses",
       description:
-        "Discover German language classes, caregiving training and other professional courses at Austra Training Institute in Eldoret, Kenya.",
+        "Discover caregiving, nurse aide, health support and ICT courses at Austra Training Institute in Eldoret, Kenya.",
       isPartOf: {
         "@id": WEBSITE_ID,
       },

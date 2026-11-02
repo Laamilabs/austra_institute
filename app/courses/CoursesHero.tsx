@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { INSTITUTE_CONTACT } from "@/lib/site";
 
 interface CoursesHeroProps {
     search: string;
@@ -33,7 +34,7 @@ export default function CoursesHero({ search, onSearchChange }: CoursesHeroProps
                 </h1>
 
                 <p className="mt-3 max-w-lg text-sm text-[#AEB9CC]">
-                    Browse our course catalogue by name, department or study level. Austra Training Institute is located at Komora Center, Tulin Supermarket Building, 4th Floor, Room 415, Eldoret, Kenya. Contact admissions to confirm current availability and entry requirements.
+                    Browse our course catalogue by name, department or study level. Austra Training Institute is located at {INSTITUTE_CONTACT.campus}. Contact admissions to confirm current availability and entry requirements.
                 </p>
 
                 <div className="mt-7 max-w-xl">

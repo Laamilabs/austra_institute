@@ -40,15 +40,15 @@ export default function Hero() {
               style={{ fontFamily: "var(--font-nunito)" }}
             >
               AUSTRA <br />
-              <p className="text-3xl sm:text-4xl md:text-left md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl 3xl:text-8xl">
+              <span className="text-3xl sm:text-4xl md:text-left md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl 3xl:text-8xl">
                 TRAINING INSTITUTE
-              </p>
+              </span>
             </h1>
 
             {/* Description */}
             <p className="hero-reveal hero-reveal-2 mt-6 w-full max-w-lg text-center text-base font-bold leading-7 text-[#0B1F3A] sm:text-lg sm:leading-8 md:text-left 2xl:max-w-xl 2xl:text-xl 3xl:max-w-2xl 3xl:text-2xl 3xl:leading-10">
-              Gain practical skills and TVET-certified qualifications across
-              Healthcare, IT, Business, and Language programs in Eldoret.
+              Explore caregiving, health support, ICT, computer packages and
+              professional courses at Austra Training Institute in Eldoret.
             </p>
 
             {/* CTA */}

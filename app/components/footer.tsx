@@ -57,9 +57,8 @@ export default function Footer() {
                         </Link>
 
                         <p className="mt-4 max-w-md text-sm leading-relaxed text-slate-400">
-                            Austra Training Institute is a premier TVET-accredited institution in
-                            Eldoret, Kenya, empowering students through market-oriented training
-                            in Health Sciences, ICT, Caregiving, and Global Languages.
+                            Austra Training Institute offers caregiving, health support, ICT,
+                            computer packages and professional courses in Eldoret, Kenya.
                         </p>
                     </div>
 
@@ -180,8 +179,8 @@ export default function Footer() {
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                                 </svg>
                                 <div className="flex flex-col">
-                                    <a href="tel:+254 703 710 401" className="hover:text-orange-400">+254 703 710 401</a>
-                                    <a href="tel:+254 720 480 750" className="hover:text-orange-400">+254 720 480 750</a>
+                                    <a href="tel:+254703710401" className="hover:text-orange-400">+254 703 710 401</a>
+                                    <a href="tel:+254720480750" className="hover:text-orange-400">+254 720 480 750</a>
                                 </div>
                             </div>
 

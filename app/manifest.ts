@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Austra Training Institute',
     short_name: 'Austra',
-    description: 'TVET-certified qualifications across Healthcare, IT, Business, and Languages',
+    description: 'Caregiving, health support, ICT and professional courses in Eldoret, Kenya',
     start_url: '/',
     display: 'standalone',
     background_color: '#ffffff',

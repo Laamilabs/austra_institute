@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import type { Course } from "@/lib/api/course";
 import CoursesPageClient from "./CoursesPageClient";
+import { SITE_URL } from "@/lib/site";
 
-const SITE_URL = "https://austratraininginstitute.co.ke";
 const PAGE_URL = `${SITE_URL}/courses`;
 
 export const metadata: Metadata = {
   title: "Courses in Eldoret, Kenya | Austra Training Institute",
   description:
-    "Browse courses at Austra Training Institute in Eldoret, Kenya. Explore German language, caregiving, nursing aide, ICT, computer packages, IELTS preparation and other professional training. Find course details, filter by department or level, and contact admissions.",
+    "Browse caregiving, nurse aide, health support, ICT, computer packages, cybersecurity and web development courses at Austra Training Institute in Eldoret, Kenya. Filter the course catalogue and apply online.",
   alternates: { canonical: "/courses" },
   openGraph: {
     type: "website",
@@ -17,14 +17,14 @@ export const metadata: Metadata = {
     siteName: "Austra Training Institute",
     title: "Courses in Eldoret, Kenya | Austra Training Institute",
     description:
-      "Find German, caregiving, nursing aide, ICT, computer packages, IELTS and professional courses at Austra Training Institute in Eldoret, Kenya.",
+      "Find caregiving, nurse aide, health support and ICT courses at Austra Training Institute in Eldoret, Kenya.",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Courses at Austra Training Institute in Eldoret, Kenya" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Courses in Eldoret, Kenya | Austra Training Institute",
     description:
-      "Browse course options and find Austra Training Institute in Eldoret, Kenya.",
+      "Browse caregiving, health support and ICT course options at Austra Training Institute in Eldoret, Kenya.",
     images: ["/og-image.jpg"],
   },
 };

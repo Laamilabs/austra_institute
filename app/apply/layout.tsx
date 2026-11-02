@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-
-const SITE_URL = "https://austratraininginstitute.co.ke";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Apply for Admission in Eldoret, Kenya",

@@ -113,7 +113,7 @@ export default function CTA() {
             {/* Tagline Badge */}
             <div className="mb-4 inline-flex items-center gap-2 rounded-sm border border-slate-200 bg-white px-3.5 py-1.5 shadow-sm 2xl:mb-6 2xl:px-4 2xl:py-2">
               <span className="text-base font-semibold uppercase tracking-wider text-orange-400 sm:text-lg 2xl:text-xl">
-                Admissions Open
+                Explore training programmes
               </span>
             </div>
 
@@ -122,32 +122,20 @@ export default function CTA() {
               className="text-3xl font-extrabold leading-tight text-[#0B1F3A] sm:text-4xl lg:text-5xl 2xl:text-6xl 3xl:text-7xl"
               style={{ fontFamily: "var(--font-nunito)" }}
             >
-              Build Practical Skills for Market-Demand Careers.
+              Build practical skills in health, care and technology.
             </h2>
 
             {/* Copy */}
             <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg 2xl:mt-6 2xl:max-w-2xl 2xl:text-xl 2xl:leading-relaxed">
-              Gain recognized certifications in Health Sciences, Caregiving, ICT, Foreign Languages, and Business Studies designed to qualify you for domestic and international opportunities.
+              Explore current caregiving, health support, ICT, computer packages and professional courses. Review each course page for its listed details, then contact admissions to confirm requirements, fees and intake dates.
             </p>
 
-            {/* Key Stats Grid */}
+            {/* Programme pathways */}
             <div className="mt-8 grid w-full max-w-xl grid-cols-2 gap-4 border-y border-slate-200 py-6 sm:grid-cols-4 2xl:mt-10 2xl:max-w-2xl 2xl:py-8">
-              <div>
-                <p className="text-2xl font-extrabold text-[#0B1F3A] 2xl:text-3xl">50+</p>
-                <p className="mt-0.5 text-xs font-medium text-slate-500 2xl:text-sm">Certified Courses</p>
-              </div>
-              <div>
-                <p className="text-2xl font-extrabold text-[#0B1F3A] 2xl:text-3xl">10K+</p>
-                <p className="mt-0.5 text-xs font-medium text-slate-500 2xl:text-sm">Trained Students</p>
-              </div>
-              <div>
-                <p className="text-2xl font-extrabold text-[#0B1F3A] 2xl:text-3xl">95%</p>
-                <p className="mt-0.5 text-xs font-medium text-slate-500 2xl:text-sm">Graduation Rate</p>
-              </div>
-              <div>
-                <p className="text-2xl font-extrabold text-[#0B1F3A] 2xl:text-3xl">TVET</p>
-                <p className="mt-0.5 text-xs font-medium text-slate-500 2xl:text-sm">Accredited</p>
-              </div>
+              <Link href="/programmes/caregiving" className="text-sm font-bold leading-5 text-[#0B1F3A] underline decoration-orange-400 underline-offset-4">Caregiving</Link>
+              <Link href="/programmes/health-support" className="text-sm font-bold leading-5 text-[#0B1F3A] underline decoration-orange-400 underline-offset-4">Nurse aide &amp; health support</Link>
+              <Link href="/programmes/ict-short-courses" className="text-sm font-bold leading-5 text-[#0B1F3A] underline decoration-orange-400 underline-offset-4">ICT &amp; digital skills</Link>
+              <Link href="/programmes/ai-workplace-automation" className="text-sm font-bold leading-5 text-[#0B1F3A] underline decoration-orange-400 underline-offset-4">AI workplace automation</Link>
             </div>
 
             {/* Action Buttons */}
@@ -200,7 +188,7 @@ export default function CTA() {
                   d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                 />
               </svg>
-              <span>Main Campus: Komora Center, Eldoret City, Kenya</span>
+              <span>Main Campus: Komora Centre, Eldoret</span>
             </div>
 
           </div>

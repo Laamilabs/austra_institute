@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { getArticle, getArticles } from "@/lib/sanity";
 import styles from "../article.module.css";
+import { SITE_URL } from "@/lib/site";
 
 type Params = {params: Promise<{slug: string}>};
 type Span = {text?: string; marks?: string[]};
@@ -49,7 +50,7 @@ export default async function ArticlePage({params}: Params) {
       {article.coverImage?.url && <div className={styles.cover}><Image src={article.coverImage.url} alt={article.coverImage.alt || article.title} fill priority unoptimized sizes="(max-width: 900px) 100vw, 1100px" /></div>}
       <div className={styles.body}>{(article.body || []).map((block, index) => renderBlock(block, index))}</div>
     </article>
-    <div className={styles.share}><span>Keep the conversation going</span><div><a href={`https://wa.me/?text=${encodeURIComponent(`${article.title} https://austratraininginstitute.co.ke/news/${slug}`)}`} target="_blank" rel="noreferrer">Share on WhatsApp <ArrowUpRight size={14} /></a><a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://austratraininginstitute.co.ke/news/${slug}`)}`} target="_blank" rel="noreferrer">Share on Facebook <ArrowUpRight size={14} /></a></div></div>
+    <div className={styles.share}><span>Keep the conversation going</span><div><a href={`https://wa.me/?text=${encodeURIComponent(`${article.title} ${SITE_URL}/news/${slug}`)}`} target="_blank" rel="noreferrer">Share on WhatsApp <ArrowUpRight size={14} /></a><a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`${SITE_URL}/news/${slug}`)}`} target="_blank" rel="noreferrer">Share on Facebook <ArrowUpRight size={14} /></a></div></div>
     {related.length > 0 && <section className={styles.related}><div className={styles.relatedHead}><p className={styles.category}>Keep reading</p><h2>More from Austra<span>.</span></h2></div><div className={styles.relatedGrid}>{related.map((item) => <Link href={`/news/${item.slug}`} key={item._id} className={styles.relatedCard}><span>{item.category}</span><h3>{item.title}</h3><ArrowUpRight size={17} /></Link>)}</div></section>}
   </main>;
 }

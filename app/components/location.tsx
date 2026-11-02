@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { INSTITUTE_CONTACT } from "@/lib/site";
 
 export default function LocationSection() {
   return (
@@ -11,7 +12,7 @@ export default function LocationSection() {
           </h2>
 
           <p className="mt-2 text-sm text-gray-600 sm:text-base">
-            Komora Centre (4th Floor - Rm 415), Eldoret, Kenya
+            {INSTITUTE_CONTACT.campus}
           </p>
         </div>
 

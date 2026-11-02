@@ -1,9 +1,18 @@
+import type { Metadata } from "next";
+import { SITE_URL } from "@/lib/site";
 import LocationSection from "../components/location";
 import PartnersSection from "../components/partners";
 import AboutHero from "./about-hero";
 import Vision from "./mission";
 import Philosophy from "./philosophy";
 import TeamSection from "./team";
+
+export const metadata: Metadata = {
+  title: "About Austra Training Institute | Eldoret, Kenya",
+  description:
+    "Learn about Austra Training Institute, its training programmes, team and main campus in Eldoret, Kenya.",
+  alternates: { canonical: `${SITE_URL}/about` },
+};
 
 export default function About() {
   return (

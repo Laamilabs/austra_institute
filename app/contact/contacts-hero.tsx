@@ -1,6 +1,6 @@
-"use client";
-
+import Link from "next/link";
 import { FiMapPin, FiPhone, FiMail, FiClock } from "react-icons/fi";
+import { INSTITUTE_CONTACT } from "@/lib/site";
 
 export default function ContactSection() {
     return (
@@ -28,76 +28,29 @@ export default function ContactSection() {
                                     Get in touch
                                 </p>
 
-                                <h2 className="text-3xl font-bold text-[#0B1F3A] sm:text-4xl">
-                                    Contact Us
-                                </h2>
-                                <p className="mt-3 text-sm leading-6 md:hidden text-slate-500 sm:text-base">
-                                    Have a question about our courses, admissions, training
-                                    programmes, or student support? Send us a message.
+                                <h1 className="text-3xl font-bold text-[#0B1F3A] sm:text-4xl">
+                                    Contact Austra Training Institute
+                                </h1>
+                                <p className="mt-3 text-sm leading-6 text-slate-500 sm:text-base">
+                                    Contact admissions about courses, application requirements,
+                                    fees, and current intakes. Visit our main campus in Eldoret.
                                 </p>
                             </div>
 
-                            <form className="space-y-5">
-                                {/* Name */}
-                                <div>
-                                    <label
-                                        htmlFor="name"
-                                        className="mb-2 block text-sm font-semibold text-[#0B1F3A]"
-                                    >
-                                        Name
-                                    </label>
-
-                                    <input
-                                        id="name"
-                                        name="name"
-                                        type="text"
-                                        placeholder="Your name"
-                                        className="w-full rounded-sm border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-orange-500 focus:ring-2 focus:ring-orange-500/10"
-                                    />
-                                </div>
-
-                                {/* Email */}
-                                <div>
-                                    <label
-                                        htmlFor="email"
-                                        className="mb-2 block text-sm font-semibold text-[#0B1F3A]"
-                                    >
-                                        Email address
-                                    </label>
-
-                                    <input
-                                        id="email"
-                                        name="email"
-                                        type="email"
-                                        placeholder="you@example.com"
-                                        className="w-full rounded-sm border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-orange-500 focus:ring-2 focus:ring-orange-500/10"
-                                    />
-                                </div>
-
-                                {/* Message */}
-                                <div>
-                                    <label
-                                        htmlFor="message"
-                                        className="mb-2 block text-sm font-semibold text-[#0B1F3A]"
-                                    >
-                                        Message
-                                    </label>
-
-                                    <textarea
-                                        id="message"
-                                        name="message"
-                                        rows={5}
-                                        placeholder="How can we help you?"
-                                        className="w-full resize-none rounded-sm border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-orange-500 focus:ring-2 focus:ring-orange-500/10"
-                                    />
-                                </div>
-                                <button
-                                    type="submit"
-                                    className="w-full rounded-sm bg-[#0B1F3A] px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition hover:bg-orange-500"
+                            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+                                <Link
+                                    href="/courses"
+                                    className="inline-flex min-h-11 items-center justify-center rounded-sm bg-[#0B1F3A] px-5 py-3 text-sm font-bold text-white transition hover:bg-orange-500"
                                 >
-                                    Send Message
-                                </button>
-                            </form>
+                                    Explore courses
+                                </Link>
+                                <Link
+                                    href="/apply"
+                                    className="inline-flex min-h-11 items-center justify-center rounded-sm border border-[#0B1F3A] px-5 py-3 text-sm font-bold text-[#0B1F3A] transition hover:bg-slate-50"
+                                >
+                                    Apply online
+                                </Link>
+                            </div>
                         </div>
 
                         {/* Contact Information */}
@@ -106,15 +59,9 @@ export default function ContactSection() {
                                 {/* Address */}
                                 <ContactItem
                                     icon={<FiMapPin className="h-6 w-6" />}
-                                    title="Visit Us"
+                                    title="Main Campus"
                                 >
-                                    <p>
-                                        Teryet Business Centre
-                                        <br />
-                                        Room 28
-                                        <br />
-                                        Kitale Town, Kenya
-                                    </p>
+                                    <p>{INSTITUTE_CONTACT.campus}</p>
                                 </ContactItem>
 
                                 {/* Phone */}
@@ -123,19 +70,14 @@ export default function ContactSection() {
                                     title="Call Us"
                                 >
                                     <p>
-                                        <a
-                                            href="tel:0725990232"
-                                            className="transition hover:text-orange-500"
-                                        >
-                                            0725 990 232
-                                        </a>
-                                        <br />
-                                        <a
-                                            href="tel:0119132560"
-                                            className="transition hover:text-orange-500"
-                                        >
-                                            011 913 2560
-                                        </a>
+                                        {INSTITUTE_CONTACT.phones.map((phone, index) => (
+                                            <span key={phone.href}>
+                                                {index > 0 && <br />}
+                                                <a href={phone.href} className="transition hover:text-orange-500">
+                                                    {phone.display}
+                                                </a>
+                                            </span>
+                                        ))}
                                     </p>
                                 </ContactItem>
 
@@ -146,10 +88,10 @@ export default function ContactSection() {
                                 >
                                     <p>
                                         <a
-                                            href="mailto:info@aussizeducationandtraining.net"
+                                            href={INSTITUTE_CONTACT.emailHref}
                                             className="break-all transition hover:text-orange-500"
                                         >
-                                            info@aussizeducationandtraining.net
+                                            {INSTITUTE_CONTACT.email}
                                         </a>
                                     </p>
                                 </ContactItem>
@@ -160,21 +102,11 @@ export default function ContactSection() {
                                     title="Opening Hours"
                                 >
                                     <p>
-                                        Monday – Friday
-                                        <br />
-                                        8:00 AM – 5:00 PM
-                                        <br />
-                                        <span className="text-slate-400">
-                                            Saturday by appointment
-                                        </span>
+                                        {INSTITUTE_CONTACT.officeHours}
                                     </p>
                                 </ContactItem>
                             </div>
 
-                            <p className="mt-3 text-sm leading-6 hidden md:block text-slate-500 sm:text-base">
-                                Have a question about our courses, admissions, training
-                                programmes, or student support? Send us a message.
-                            </p>
                             {/* Branch information */}
                             <div className="mt-10 border-t border-slate-200 pt-8">
                                 <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-orange-500">

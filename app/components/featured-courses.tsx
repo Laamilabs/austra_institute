@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   ArrowRight,
   BookOpen,
@@ -12,33 +12,12 @@ import {
   Clock3,
   Sparkles,
 } from "lucide-react";
-import { courseApi, type Course } from "@/lib/api/course";
+import type { Course } from "@/lib/api/course";
 
-export default function FeaturedCourses() {
-  const [courses, setCourses] = useState<Course[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+export default function FeaturedCourses({ initialCourses }: { initialCourses: Course[] }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const reduceMotion = useReducedMotion();
-
-  useEffect(() => {
-    let isCurrent = true;
-
-    courseApi
-      .getFeatured()
-      .then((result) => {
-        if (isCurrent) setCourses(Array.isArray(result) ? result : []);
-      })
-      .catch(() => {
-        if (isCurrent) setCourses([]);
-      })
-      .finally(() => {
-        if (isCurrent) setIsLoading(false);
-      });
-
-    return () => {
-      isCurrent = false;
-    };
-  }, []);
+  const courses = initialCourses;
 
   const visibleCourses = useMemo(() => {
     if (!courses.length) return [];
@@ -80,18 +59,7 @@ export default function FeaturedCourses() {
           </Link>
         </div>
 
-        {isLoading ? (
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6" aria-label="Loading featured courses">
-            {[0, 1, 2].map((item) => (
-              <div key={item} className={`${item === 1 ? "hidden sm:block" : ""} ${item === 2 ? "hidden lg:block" : ""} animate-pulse rounded-2xl border border-slate-200 bg-white p-6`}>
-                <div className="h-10 w-10 rounded-xl bg-slate-100" />
-                <div className="mt-6 h-3 w-24 rounded bg-slate-100" />
-                <div className="mt-3 h-6 w-3/4 rounded bg-slate-100" />
-                <div className="mt-5 h-4 w-1/2 rounded bg-slate-100" />
-              </div>
-            ))}
-          </div>
-        ) : courses.length ? (
+        {courses.length ? (
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
             <AnimatePresence initial={false} mode="popLayout">
               {visibleCourses.map((course, index) => (
@@ -169,7 +137,7 @@ export default function FeaturedCourses() {
           </div>
         )}
 
-        {!isLoading && courses.length > 1 && (
+        {courses.length > 1 && (
           <div className="mt-6 flex items-center justify-between gap-4">
             <p className="text-xs font-medium text-slate-500" aria-live="polite">
               {String(activeIndex + 1).padStart(2, "0")} <span className="px-1 text-orange-500">/</span> {String(courses.length).padStart(2, "0")} featured courses

@@ -1,5 +1,6 @@
 
 import type { Metadata } from "next";
+import { SITE_URL } from "@/lib/site";
 import Link from "next/link";
 import {
     ArrowDownRight,
@@ -11,7 +12,6 @@ import {
     MessageSquare,
 } from "lucide-react";
 
-const SITE_URL = "https://austratraininginstitute.co.ke";
 const PAGE_URL = `${SITE_URL}/faqs`;
 const SOCIAL_IMAGE = `${SITE_URL}/cta/class.png`;
 const WHATSAPP_URL = "https://wa.me/254703710401";
@@ -281,10 +281,10 @@ const faqGroups: FaqGroup[] = [
             {
                 question: "Where is Austra Training Institute located?",
                 schemaAnswer:
-                    "Austra Training Institute is located at Komora Center, Tulin Supermarket Building, 4th Floor, Room 415, Eldoret, Kenya.",
+                    "Austra Training Institute's main campus is at Komora Centre, Eldoret, Kenya.",
                 answer: (
                     <>
-                        Visit Austra Training Institute at Komora Center
+                        Visit Austra Training Institute at Komora Centre
                         (Tulin Supermarket Building), 4th Floor, Room 415,
                         in Eldoret, Kenya.{" "}
                         <Link

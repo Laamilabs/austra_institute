@@ -81,9 +81,9 @@ function getAbbreviation(name: string) {
   return initials.toUpperCase() || "ATI";
 }
 
-export default function SchoolsGrid() {
-  const [schools, setSchools] = useState<Department[]>([]);
-  const [loading, setLoading] = useState(true);
+export default function SchoolsGrid({ initialSchools }: { initialSchools: Department[] }) {
+  const [schools, setSchools] = useState<Department[]>(initialSchools);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [retry, setRetry] = useState(0);
 
@@ -91,7 +91,6 @@ export default function SchoolsGrid() {
     let isCurrent = true;
 
     async function loadSchools() {
-      setLoading(true);
       setError(null);
       try {
         const departments = await departmentApi.getAll();
@@ -103,7 +102,9 @@ export default function SchoolsGrid() {
           );
         }
       } catch {
-        if (isCurrent) setError("We couldn't load the schools right now.");
+        if (isCurrent && initialSchools.length === 0) {
+          setError("We couldn't load the schools right now.");
+        }
       } finally {
         if (isCurrent) setLoading(false);
       }
@@ -113,7 +114,7 @@ export default function SchoolsGrid() {
     return () => {
       isCurrent = false;
     };
-  }, [retry]);
+  }, [retry, initialSchools]);
 
   return (
     <section id="schools" className="w-full bg-slate-50 px-4 pb-16 pt-4 sm:px-6 sm:pb-20 sm:pt-6 lg:px-8 2xl:px-12 2xl:pb-28">

@@ -1,4 +1,10 @@
 import { Construction, GraduationCap } from "lucide-react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Student Portal | Austra Training Institute",
+  robots: { index: false, follow: false },
+};
 
 export default function StudentPortalPage() {
   return (

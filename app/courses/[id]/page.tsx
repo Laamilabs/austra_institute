@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import CourseDetailClient from "./course-detail-client";
 import type { Course } from "@/lib/api/course";
+import { SITE_URL } from "@/lib/site";
 
-const SITE_URL = "https://austratraininginstitute.co.ke";
 const API_URL = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:3300").replace(/\/$/, "");
 
 type PageProps = { params: Promise<{ id: string }> };
