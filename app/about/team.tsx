@@ -9,13 +9,7 @@ const teamMembers = [
     imagePosition: "50% 18%",
     isDirector: true,
   },
-  {
-    name: "Sandra Koech",
-    role: "Registrar (Admissions and student records)",
-    bio: "Delivers practical caregiving instruction that helps prepare learners for healthcare and care-support roles with empathy and professionalism.",
-    image: "/team/sandra.jpg",
-    imagePosition: "50% 23%",
-  },
+
   {
     name: "Keter Titus",
     role: "Head of Science & Technology",
@@ -24,11 +18,18 @@ const teamMembers = [
     imagePosition: "50% 24%",
   },
   {
-    name: "Wafula Lawrence",
-    role: "Head of Music & Media Arts",
-    bio: "Guides the Music and Media Arts programmes, encouraging creative exploration, confident performance, and hands-on media production.",
-    image: "/team/lawrence.jpg",
+    name: "Antonette Babra",
+    role: "Head of Languages & International Studies",
+    bio: "Leads language and international studies programmes, helping learners build communication skills and cross-cultural understanding.",
+    image: "/team/anto.jpg",
     imagePosition: "50% 20%",
+  },
+  {
+    name: "Sandra Koech",
+    role: "Registrar (Admissions and student records)",
+    bio: "Delivers practical caregiving instruction that helps prepare learners for healthcare and care-support roles with empathy and professionalism.",
+    image: "/team/sandra.jpg",
+    imagePosition: "50% 23%",
   },
   {
     name: "Rachel Chepleting",
@@ -38,10 +39,10 @@ const teamMembers = [
     imagePosition: "50% 25%",
   },
   {
-    name: "Antonette Babra",
-    role: "Head of Languages & International Studies",
-    bio: "Leads language and international studies programmes, helping learners build communication skills and cross-cultural understanding.",
-    image: "/team/anto.jpg",
+    name: "Wafula Lawrence",
+    role: "Head of Music & Media Arts",
+    bio: "Guides the Music and Media Arts programmes, encouraging creative exploration, confident performance, and hands-on media production.",
+    image: "/team/lawrence.jpg",
     imagePosition: "50% 20%",
   },
   {

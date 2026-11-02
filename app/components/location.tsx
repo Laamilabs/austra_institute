@@ -34,7 +34,7 @@ export default function LocationSection() {
             <iframe
               title="Austra Training Institute Location Map"
               className="h-full min-h-80 w-full border-0"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1225.9880361174933!2d35.271790472213745!3d0.5168603000000007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x17810179667d6d9f%3A0x4ee051166531a269!2sAussiz%20Education%20%26%20Training!5e1!3m2!1sen!2ske!4v1736767720950!5m2!1sen!2ske"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3792.2506977500902!2d35.27063022496464!3d0.5175814994773537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x178101baaea68e29%3A0xef4ed7975eb3b251!2sAustra%20Training%20Institute!5e1!3m2!1sen!2ske!4v1793606320859!5m2!1sen!2ske"
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"

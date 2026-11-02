@@ -29,12 +29,11 @@ export default function CoursesHero({ search, onSearchChange }: CoursesHeroProps
                 </p>
 
                 <h1 className="mt-3 max-w-xl text-3xl font-bold leading-tight text-white md:text-4xl">
-                    Find the right course, across every department.
+                    Explore courses at Austra Training Institute in Eldoret
                 </h1>
 
                 <p className="mt-3 max-w-lg text-sm text-[#AEB9CC]">
-                    Search by course name, code, or department to see what's
-                    offered right now.
+                    Browse our course catalogue by name, department or study level. Austra Training Institute is located at Komora Center, Tulin Supermarket Building, 4th Floor, Room 415, Eldoret, Kenya. Contact admissions to confirm current availability and entry requirements.
                 </p>
 
                 <div className="mt-7 max-w-xl">

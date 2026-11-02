@@ -66,6 +66,14 @@ export const courseApi = {
   },
 
   /**
+   * Get public course details for the website catalog.
+   * GET /api/course/catalog
+   */
+  getCatalog() {
+    return api.get<Course[]>("/course/catalog");
+  },
+
+  /**
    * Get courses selected for the featured homepage carousel
    * GET /api/course/featured
    */
