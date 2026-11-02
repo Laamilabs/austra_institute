@@ -10,6 +10,7 @@ const PROGRAMMES = {
     metaTitle: "Caregiving Courses in Eldoret | Austra Training Institute",
     description: "Explore caregiving and individual support courses at Austra Training Institute in Eldoret. Review current course options and details, then apply online.",
     intro: "Explore current caregiving and individual support programmes at Austra Training Institute in Eldoret. Course pages provide the available level and details; contact admissions to confirm current entry requirements, fees and intake dates.",
+    keywords: ["caregiving courses Eldoret", "caregiver training Kenya", "individual support course", "Austra Training Institute"],
     matches: /caregiv|individual support|ageing|aged care|disability support/i,
   },
   "health-support": {
@@ -17,22 +18,24 @@ const PROGRAMMES = {
     metaTitle: "Nurse Aide & Health Support Courses | Austra Eldoret",
     description: "Browse nurse aide, nurse assistant and Health Services Support courses at Austra Training Institute in Eldoret, Kenya.",
     intro: "Find nurse aide, nurse assistant and Health Services Support programmes in one place. Compare the course names and levels currently listed, and contact admissions for the latest requirements, fees and intake information.",
+    keywords: ["nurse aide course Eldoret", "nurse assistant training Kenya", "health services support course", "Austra Training Institute"],
     matches: /nurse aide|nurse assistant|nursing aide|health services support|health support/i,
   },
   "ict-short-courses": {
     title: "ICT & Digital Skills Short Courses in Eldoret",
     metaTitle: "ICT Short Courses in Eldoret | Austra Training Institute",
-    description: "Explore computer packages, ICT, web development and cybersecurity courses at Austra Training Institute in Eldoret. Browse current course details and apply online.",
-    intro: "Browse current computer packages, ICT, web development and cybersecurity options at Austra Training Institute in Eldoret. Use each course page to review its level and available details; contact admissions to confirm current delivery, requirements and intake dates.",
-    matches: /computer package|computer application|\bICT\b|information communication technology|cybersecurity|web technolog|web development|mobile development/i,
+    description: "Explore computer packages, ICT, web development, cybersecurity and AI automation courses at Austra Training Institute in Eldoret. Browse current catalogue listings and apply online.",
+    intro: "Browse computer packages, ICT, web development, cybersecurity and AI automation courses at Austra Training Institute in Eldoret. The courses shown below come from the current catalogue; contact admissions to confirm delivery, requirements and intake dates.",
+    keywords: ["ICT short courses Eldoret", "computer packages Eldoret", "web development course", "cybersecurity course Kenya", "AI automation course"],
+    matches: /computer package|computer application|\bICT\b|\bAI\b|Artificial Intelligence|information communication technology|cybersecurity|web technolog|web development|mobile development/i,
   },
-  "ai-workplace-automation": {
-    title: "AI for Workplace Automation in Eldoret",
-    metaTitle: "AI Workplace Automation Course | Austra Training Institute",
-    description: "Learn about Austra Training Institute’s AI for Workplace Automation short course in Eldoret. Check current availability and course details before applying.",
-    intro: "Austra Training Institute has published a guide to its AI for Workplace Automation short course. Check the course catalogue for a current application listing, and confirm availability, duration, entry requirements and fees with admissions.",
-    matches: /\bAI\b|artificial intelligence|workplace automation/i,
-    article: { href: "/news/ai-skills-future-of-work-8-reasons-to-learn-ai", label: "Read the AI for Workplace Automation course guide" },
+  music: {
+    title: "Music Courses in Eldoret",
+    metaTitle: "Piano & Guitar Music Courses in Eldoret | Austra Training Institute",
+    description: "Explore piano, guitar and other music courses at Austra Training Institute in Eldoret. Browse current catalogue listings and contact admissions to confirm availability.",
+    intro: "Discover music learning at Austra Training Institute in Eldoret. Explore piano, guitar and other music courses currently listed in our catalogue, then contact admissions to confirm lesson formats, requirements, fees and intake dates.",
+    keywords: ["piano lessons Eldoret", "guitar courses Eldoret", "music courses Kenya", "Austra Training Institute"],
+    matches: /piano|guitar|music|keyboard|instrument/i,
   },
 } as const;
 
@@ -68,11 +71,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: programme.metaTitle,
     description: programme.description,
+    keywords: [...programme.keywords],
     alternates: { canonical },
     openGraph: {
       type: "website",
       url: canonical,
       siteName: INSTITUTE_CONTACT.name,
+      title: programme.metaTitle,
+      description: programme.description,
+    },
+    twitter: {
+      card: "summary_large_image",
       title: programme.metaTitle,
       description: programme.description,
     },
@@ -97,6 +106,14 @@ export default async function ProgrammePage({ params }: PageProps) {
     name: programme.title,
     description: programme.description,
     about: { "@id": `${SITE_URL}/#organization` },
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+        { "@type": "ListItem", position: 2, name: "Programmes", item: `${SITE_URL}/programmes` },
+        { "@type": "ListItem", position: 3, name: programme.title, item: pageUrl },
+      ],
+    },
     mainEntity: {
       "@type": "ItemList",
       numberOfItems: courses.length,
@@ -121,16 +138,20 @@ export default async function ProgrammePage({ params }: PageProps) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <header className="bg-[#0B1F3A] px-5 py-20 text-white sm:px-8 lg:py-28">
         <div className="mx-auto max-w-6xl">
+          <nav aria-label="Breadcrumb" className="mb-7 text-sm text-slate-300">
+            <ol className="flex flex-wrap items-center gap-2">
+              <li><Link href="/" className="underline decoration-white/40 underline-offset-4 hover:text-white">Home</Link></li>
+              <li aria-hidden="true">/</li>
+              <li><Link href="/programmes" className="underline decoration-white/40 underline-offset-4 hover:text-white">Programmes</Link></li>
+              <li aria-hidden="true">/</li>
+              <li aria-current="page" className="text-white">{programme.title}</li>
+            </ol>
+          </nav>
           <p className="text-sm font-bold uppercase tracking-[0.16em] text-orange-300">
             Austra Training Institute · Eldoret, Kenya
           </p>
           <h1 className="mt-4 max-w-4xl text-4xl font-extrabold leading-tight sm:text-5xl">{programme.title}</h1>
           <p className="mt-5 max-w-3xl text-base leading-7 text-slate-200 sm:text-lg">{programme.intro}</p>
-          {"article" in programme && programme.article && (
-            <Link href={programme.article.href} className="mt-5 inline-flex min-h-11 items-center font-semibold text-orange-300 underline underline-offset-4 hover:text-orange-200">
-              {programme.article.label}
-            </Link>
-          )}
           <div className="mt-8 flex flex-wrap gap-3">
             <Link href="/courses" className="inline-flex min-h-11 items-center rounded-sm bg-orange-400 px-5 py-3 font-bold text-[#0B1F3A] hover:bg-orange-300">Explore all courses</Link>
             <Link href="/apply" className="inline-flex min-h-11 items-center rounded-sm border border-white/50 px-5 py-3 font-bold text-white hover:bg-white/10">Apply online</Link>

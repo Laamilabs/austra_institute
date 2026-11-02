@@ -12,7 +12,7 @@ const staticRoutes = [
   "/programmes/caregiving",
   "/programmes/health-support",
   "/programmes/ict-short-courses",
-  "/programmes/ai-workplace-automation",
+  "/programmes/music",
   "/news",
   "/contact",
   "/faqs",

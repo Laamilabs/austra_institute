@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, BrainCircuit, HeartHandshake, Laptop, Stethoscope } from "lucide-react";
+import { ArrowRight, Guitar, HeartHandshake, Laptop, Stethoscope } from "lucide-react";
 import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Explore Our Programmes | Austra Training Institute, Eldoret",
-  description: "Explore caregiving, health support and nurse aide training, ICT short courses, computer packages, and AI workplace automation at Austra Training Institute in Eldoret.",
+  description: "Explore caregiving, health support and nurse aide training, ICT short courses, computer packages, piano, guitar and music courses at Austra Training Institute in Eldoret.",
   alternates: { canonical: `${SITE_URL}/programmes` },
   openGraph: {
     title: "Explore Our Programmes | Austra Training Institute",
@@ -19,7 +19,7 @@ const pathways = [
   { slug: "caregiving", title: "Caregiving", description: "Explore practical training for people preparing to support individuals and families with everyday care needs.", Icon: HeartHandshake, number: "01" },
   { slug: "health-support", title: "Health support & nurse aide", description: "Find health support services and nurse aide courses listed in the current course catalogue.", Icon: Stethoscope, number: "02" },
   { slug: "ict-short-courses", title: "ICT & digital skills", description: "Browse computer packages and available ICT short courses, including web and cybersecurity topics where listed.", Icon: Laptop, number: "03" },
-  { slug: "ai-workplace-automation", title: "AI & workplace automation", description: "Explore learning resources about practical AI skills and check the current catalogue for available enrolment options.", Icon: BrainCircuit, number: "04" },
+  { slug: "music", title: "Music · piano & guitar", description: "Explore piano, guitar and other music courses currently listed in our catalogue, then confirm current availability with admissions.", Icon: Guitar, number: "04" },
 ];
 
 export default function ProgrammesPage() {

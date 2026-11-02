@@ -38,7 +38,7 @@ const programmes = [
   { label: "Caregiving", href: "/programmes/caregiving" },
   { label: "Nurse aide & health support", href: "/programmes/health-support" },
   { label: "ICT & digital skills", href: "/programmes/ict-short-courses" },
-  { label: "AI workplace automation", href: "/programmes/ai-workplace-automation" },
+  { label: "Music · piano & guitar", href: "/programmes/music" },
 ];
 
 export default function CTA() {

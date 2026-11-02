@@ -105,7 +105,7 @@ export const metadata: Metadata = {
     "computer packages in Eldoret",
     "cybersecurity course in Eldoret",
     "web development course in Eldoret",
-    "AI workplace automation course in Eldoret",
+    "piano and guitar music courses in Eldoret",
     "IELTS classes in Eldoret",
     "IELTS preparation in Kenya",
   ],
