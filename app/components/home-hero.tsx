@@ -84,6 +84,12 @@ export default function Hero() {
                   Apply Now
                 </Link>
               </p>
+              <Link
+                href="/programmes"
+                className="rounded-full border border-[#0B1F3A]/30 bg-white/80 px-5 py-3 text-sm font-bold text-[#0B1F3A] transition-colors hover:border-orange-500 hover:text-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2"
+              >
+                Explore our programmes
+              </Link>
             </div>
           </div>
         </div>

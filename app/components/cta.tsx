@@ -1,253 +1,255 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
+import { FiArrowUpRight, FiMapPin } from "react-icons/fi";
 
-const images = {
-  column1: [
-    "/cta/cam1.jpg",
-    "/cta/careclass.png",
-    "/cta/comp1.png",
-    "/cta/med1.jpg",
-    "/cta/staff1.jpg",
-    "/cta/students1.png",
-  ],
-  column2: [
-    "/cta/careclass2.png",
-    "/cta/class.jpg",
-    "/cta/music3.jpg",
-    "/cta/careclass3.png",
-    "/cta/tvet.png",
-    "/cta/comp2.jpg",
-  ],
-  column3: [
-    "/cta/posters/1.png",
-    "/cta/posters/2.png",
-    "/cta/posters/3.png",
-    "/cta/posters/4.png",
-    "/cta/posters/5.png",
-    "/cta/posters/6.png",
-  ],
-};
+/**
+ * Bento layout on a 4 × 4 grid (items flow in this order):
+ *
+ *  ┌───────────┬────┬────┐
+ *  │           │ 2  │    │
+ *  │     1     ├────┤ 3  │
+ *  │           │ 4  │    │
+ *  ├────┬──────┴────┼────┤
+ *  │    │     6     │ 7  │
+ *  │ 5  ├────┬──────┴────┤
+ *  │    │ 8  │     9     │
+ *  └────┴────┴───────────┘
+ *
+ *  `featured` tiles always show their caption; the rest reveal it on hover.
+ *  Tile 8 is the navy campus card (no image).
+ */
+type Tile =
+  | { kind: "image"; src: string; alt: string; caption: string; span: string; featured?: boolean }
+  | { kind: "campus"; span: string };
 
-function ImageCard({ src, alt }: { src: string; alt: string }) {
-  return (
-    <div className="group relative h-32 w-full shrink-0 overflow-hidden rounded-md border border-slate-200 bg-slate-100 shadow-sm sm:h-40 md:h-44 lg:h-48 2xl:h-52 3xl:h-56">
-      {/* Subtle corner mark accent */}
-      <span className="absolute left-0 top-0 z-10 h-2.5 w-2.5 border-l-2 border-t-2 border-orange-500 opacity-80" />
-      <span className="absolute right-0 top-0 z-10 h-2.5 w-2.5 border-r-2 border-t-2 border-orange-500 opacity-80" />
-      <span className="absolute bottom-0 left-0 z-10 h-2.5 w-2.5 border-b-2 border-l-2 border-orange-500 opacity-80" />
-      <span className="absolute bottom-0 right-0 z-10 h-2.5 w-2.5 border-b-2 border-r-2 border-orange-500 opacity-80" />
+const bento: Tile[] = [
+  { kind: "image", src: "/cta/careclass3.png", alt: "Students learning together at Austra Training Institute", caption: "Care training", span: "col-span-2 row-span-2", featured: true },
+  { kind: "image", src: "/cta/cam1.jpg", alt: "Media and photography training at Austra", caption: "Media", span: "" },
+  { kind: "image", src: "/cta/careclass2.png", alt: "Caregiving class at Austra", caption: "Caregiving", span: "row-span-2" },
+  { kind: "image", src: "/cta/med1.jpg", alt: "Health support training at Austra", caption: "Health support", span: "" },
+  { kind: "image", src: "/cta/class.jpg", alt: "Classroom session at Austra", caption: "Classroom", span: "row-span-2" },
+  { kind: "image", src: "/cta/staff2.jpg", alt: "Austra staff and trainers", caption: "Our trainers", span: "col-span-2", featured: true },
+  { kind: "image", src: "/cta/comp2.jpg", alt: "Practical ICT class at Austra", caption: "ICT", span: "" },
+  { kind: "campus", span: "" },
+  { kind: "image", src: "/cta/music2.jpg", alt: "Piano classes at Austra", caption: "Music", span: "col-span-2", featured: true },
+];
 
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        sizes="(max-width: 640px) 30vw, (max-width: 1024px) 25vw, (max-width: 1536px) 15vw, 12vw"
-        className="object-cover object-center transition duration-500 group-hover:scale-105"
-      />
-      <div className="absolute inset-0 bg-[#0B1F3A]/10 transition-colors duration-300 group-hover:bg-transparent" />
-    </div>
-  );
-}
+const programmes = [
+  { label: "Caregiving", href: "/programmes/caregiving" },
+  { label: "Nurse aide & health support", href: "/programmes/health-support" },
+  { label: "ICT & digital skills", href: "/programmes/ict-short-courses" },
+  { label: "AI workplace automation", href: "/programmes/ai-workplace-automation" },
+];
 
 export default function CTA() {
   return (
-    <section className="relative w-full overflow-hidden bg-slate-50 py-12 lg:py-16 2xl:py-24 3xl:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 2xl:max-w-[1536px] 2xl:px-12 3xl:max-w-[1920px]">
-        <div className="grid grid-cols-1 items-center gap-8 sm:gap-10 lg:grid-cols-12 lg:gap-12 2xl:gap-16 3xl:gap-20">
+    <section
+      aria-labelledby="cta-title"
+      className="relative w-full overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50 py-12 sm:py-14 lg:py-16 2xl:py-24 3xl:py-28 min-[2400px]:py-36"
+    >
+      {/* Soft background texture + glows */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-60"
+        style={{
+          backgroundImage: "radial-gradient(rgba(11,31,58,0.10) 1px, transparent 1px)",
+          backgroundSize: "26px 26px",
+          maskImage: "linear-gradient(to bottom, transparent, black 25%, black 75%, transparent)",
+          WebkitMaskImage: "linear-gradient(to bottom, transparent, black 25%, black 75%, transparent)",
+        }}
+      />
+      <div aria-hidden="true" className="pointer-events-none absolute -right-32 top-10 h-80 w-80 rounded-full bg-orange-400/10 blur-3xl" />
+      <div aria-hidden="true" className="pointer-events-none absolute -left-32 bottom-10 h-80 w-80 rounded-full bg-[#0B1F3A]/[0.06] blur-3xl" />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 2xl:max-w-384 2xl:px-12 3xl:max-w-[1920px] min-[2400px]:max-w-[2400px] min-[2400px]:px-16">
+        <div className="grid grid-cols-1 items-center gap-10 sm:gap-12 lg:grid-cols-12 lg:items-stretch lg:gap-12 2xl:gap-16 3xl:gap-20 min-[2400px]:gap-28">
 
           {/* =====================================================
-              LEFT SIDE: MOVING IMAGE CAROUSEL COLUMNS
+              BENTO IMAGE GRID (below the text on mobile, left on desktop)
+              Fills the full height of the text column on lg+.
           ===================================================== */}
-          <div className="relative h-90 w-full overflow-hidden sm:h-107.5 md:h-125 lg:col-span-6 lg:h-130 2xl:h-140 3xl:h-160 xl:col-span-5">
-            <div className="grid h-full grid-cols-3 gap-2 sm:gap-3 md:gap-4 2xl:gap-5">
+          <div className="relative order-2 h-96 sm:h-120 lg:order-1 lg:col-span-6 lg:h-auto lg:min-h-130 xl:col-span-5">
+            <div className="grid h-full w-full grid-cols-4 grid-rows-4 gap-1.5 sm:gap-2.5 lg:absolute lg:inset-0 2xl:gap-3 min-[2400px]:gap-4">
+              {bento.map((tile, i) => {
+                if (tile.kind === "campus") {
+                  return (
+                    <Link
+                      key="campus"
+                      href="/contact"
+                      aria-label="Visit our main campus in Eldoret"
+                      className={`group relative flex flex-col justify-between overflow-hidden rounded-sm bg-[#0B1F3A] p-2 text-white shadow-sm ring-1 ring-[#0B1F3A] transition-colors duration-300 hover:bg-[#10305a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 sm:p-3 2xl:p-4 ${tile.span}`}
+                    >
+                      <span aria-hidden="true" className="absolute inset-x-0 top-0 h-0.5 bg-orange-400" />
+                      <FiMapPin aria-hidden="true" className="h-4 w-4 text-orange-400 sm:h-5 sm:w-5 2xl:h-6 2xl:w-6" />
+                      <span className="leading-tight">
+                        <span className="hidden text-[10px] font-medium uppercase tracking-wider text-white/60 sm:block 2xl:text-xs">
+                          Main campus
+                        </span>
+                        <span className="block text-[11px] font-semibold sm:text-sm 2xl:text-lg min-[2400px]:text-2xl">
+                          Eldoret
+                        </span>
+                      </span>
+                      <FiArrowUpRight
+                        aria-hidden="true"
+                        className="absolute right-1.5 top-2 h-3.5 w-3.5 text-white/40 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-orange-400 sm:right-2 sm:top-3 sm:h-4 sm:w-4"
+                      />
+                    </Link>
+                  );
+                }
 
-              {/* Column 1 — Scroll Down */}
-              <div className="scroll-wrapper relative h-full overflow-hidden">
-                <div className="scroll-down flex flex-col gap-2 sm:gap-3 md:gap-4 2xl:gap-5">
-                  {[...images.column1, ...images.column1].map((src, index) => (
-                    <ImageCard
-                      key={`col1-${index}`}
-                      src={src}
-                      alt="Austra Training Institute - Health & Caregiving Training"
+                return (
+                  <div
+                    key={`${tile.src}-${i}`}
+                    className={`group relative overflow-hidden rounded-sm border border-slate-200 bg-slate-100 shadow-sm ${tile.span}`}
+                  >
+                    <Image
+                      src={tile.src}
+                      alt={tile.alt}
+                      fill
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 45vw, (max-width: 1536px) 30vw, 25vw"
+                      className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                     />
-                  ))}
-                </div>
-              </div>
 
-              {/* Column 2 — Scroll Up */}
-              <div className="scroll-wrapper relative h-full overflow-hidden">
-                <div className="scroll-up flex flex-col gap-2 sm:gap-3 md:gap-4 2xl:gap-5">
-                  {[...images.column2, ...images.column2].map((src, index) => (
-                    <ImageCard
-                      key={`col2-${index}`}
-                      src={src}
-                      alt="Austra Training Institute - ICT and Practical Classes"
+                    {/* Depth: navy fade from the bottom, clears on hover */}
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-0 bg-gradient-to-t from-[#0B1F3A]/35 via-transparent to-transparent transition-opacity duration-300 group-hover:opacity-40"
                     />
-                  ))}
-                </div>
-              </div>
 
-              {/* Column 3 — Scroll Down (Slower) */}
-              <div className="scroll-wrapper relative h-full overflow-hidden">
-                <div className="scroll-down-slow flex flex-col gap-2 sm:gap-3 md:gap-4 2xl:gap-5">
-                  {[...images.column3, ...images.column3].map((src, index) => (
-                    <ImageCard
-                      key={`col3-${index}`}
-                      src={src}
-                      alt="Austra Training Institute - Posters and Events"
+                    {/* Caption chip */}
+                    <span
+                      className={`absolute bottom-1.5 left-1.5 z-10 rounded-sm bg-white/90 px-1.5 py-0.5 text-[10px] font-semibold text-[#0B1F3A] shadow-sm ring-1 ring-black/5 backdrop-blur-sm transition-all duration-300 sm:bottom-2.5 sm:left-2.5 sm:px-2 sm:py-1 sm:text-xs 2xl:text-sm min-[2400px]:text-lg ${
+                        tile.featured
+                          ? ""
+                          : "hidden sm:block sm:translate-y-1 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100"
+                      }`}
+                    >
+                      <span aria-hidden="true" className="mr-1.5 inline-block h-1.5 w-1.5 bg-orange-500 align-middle" />
+                      {tile.caption}
+                    </span>
+
+                    {/* Orange line that draws in on hover */}
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-orange-400 transition-transform duration-300 ease-out group-hover:scale-x-100"
                     />
-                  ))}
-                </div>
-              </div>
-
+                  </div>
+                );
+              })}
             </div>
           </div>
 
           {/* =====================================================
-              RIGHT SIDE: CONTENT (LEFT-ALIGNED TEXT)
+              CONTENT
           ===================================================== */}
-          <div className="flex flex-col items-start text-left lg:col-span-6 lg:pl-6 xl:col-span-7 2xl:pl-8">
+          <div className="order-1 flex flex-col items-start text-left lg:order-2 lg:col-span-6 lg:pl-6 xl:col-span-7 xl:pl-10 2xl:pl-12 min-[2400px]:pl-20">
 
-            {/* Tagline Badge */}
-            <div className="mb-4 inline-flex items-center gap-2 rounded-sm border border-slate-200 bg-white px-3.5 py-1.5 shadow-sm 2xl:mb-6 2xl:px-4 2xl:py-2">
-              <span className="text-base font-semibold uppercase tracking-wider text-orange-400 sm:text-lg 2xl:text-xl">
-                Explore training programmes
+            {/* Eyebrow */}
+            <div className="flex items-center gap-3">
+              <span aria-hidden="true" className="h-0.5 w-8 bg-orange-400 2xl:w-10" />
+              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-orange-500 sm:text-sm 2xl:text-base min-[2400px]:text-lg">
+                Programmes
               </span>
             </div>
 
             {/* Heading */}
             <h2
-              className="text-3xl font-extrabold leading-tight text-[#0B1F3A] sm:text-4xl lg:text-5xl 2xl:text-6xl 3xl:text-7xl"
-              style={{ fontFamily: "var(--font-nunito)" }}
+              id="cta-title"
+              className="mt-4 max-w-2xl text-3xl font-bold leading-[1.08] tracking-tight text-[#0B1F3A] sm:text-4xl lg:text-[3.25rem] 2xl:mt-6 2xl:max-w-4xl 2xl:text-6xl 3xl:text-7xl min-[2400px]:max-w-5xl min-[2400px]:text-8xl"
             >
-              Build practical skills in health, care and technology.
+              Skills for health,
+              <br />
+              care and{" "}
+              <span className="relative inline-block">
+                technology
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-x-0 -bottom-0.5 h-[0.14em] bg-orange-400 sm:-bottom-1"
+                />
+              </span>
+              .
             </h2>
 
             {/* Copy */}
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg 2xl:mt-6 2xl:max-w-2xl 2xl:text-xl 2xl:leading-relaxed">
-              Explore current caregiving, health support, ICT, computer packages and professional courses. Review each course page for its listed details, then contact admissions to confirm requirements, fees and intake dates.
+            <p className="mt-5 max-w-md text-base leading-7 text-slate-600 sm:max-w-lg sm:text-lg sm:leading-8 2xl:mt-7 2xl:max-w-xl 2xl:text-xl 2xl:leading-9 min-[2400px]:max-w-3xl min-[2400px]:text-2xl min-[2400px]:leading-10">
+              Pick a programme, then talk to admissions to confirm requirements, fees and intake dates.
             </p>
 
-            {/* Programme pathways */}
-            <div className="mt-8 grid w-full max-w-xl grid-cols-2 gap-4 border-y border-slate-200 py-6 sm:grid-cols-4 2xl:mt-10 2xl:max-w-2xl 2xl:py-8">
-              <Link href="/programmes/caregiving" className="text-sm font-bold leading-5 text-[#0B1F3A] underline decoration-orange-400 underline-offset-4">Caregiving</Link>
-              <Link href="/programmes/health-support" className="text-sm font-bold leading-5 text-[#0B1F3A] underline decoration-orange-400 underline-offset-4">Nurse aide &amp; health support</Link>
-              <Link href="/programmes/ict-short-courses" className="text-sm font-bold leading-5 text-[#0B1F3A] underline decoration-orange-400 underline-offset-4">ICT &amp; digital skills</Link>
-              <Link href="/programmes/ai-workplace-automation" className="text-sm font-bold leading-5 text-[#0B1F3A] underline decoration-orange-400 underline-offset-4">AI workplace automation</Link>
+            {/* Programme list (same pattern as "More on us") */}
+            <div className="mt-8 w-full max-w-xl 2xl:mt-12 2xl:max-w-2xl min-[2400px]:mt-14 min-[2400px]:max-w-4xl">
+              <h3 className="mb-4 text-lg font-semibold tracking-tight text-[#0B1F3A] 2xl:mb-6 2xl:text-xl 3xl:text-2xl">
+                Explore by pathway
+              </h3>
+
+              <ul className="border-t-2 border-[#0B1F3A]">
+                {programmes.map((item, i) => (
+                  <li key={item.href} className="group relative border-b border-slate-200">
+                    <Link href={item.href} className="block w-full focus-visible:outline-none">
+                      <span
+                        aria-hidden="true"
+                        className="absolute inset-y-0 left-0 w-0 bg-[#0B1F3A] transition-[width] duration-300 ease-out group-hover:w-full group-focus-within:w-full"
+                      />
+                      <div className="relative z-10 flex items-center justify-between gap-4 px-2 py-4 sm:py-5 2xl:py-7 min-[2400px]:py-8">
+                        <span className="flex items-baseline gap-4 2xl:gap-5">
+                          <span
+                            aria-hidden="true"
+                            className="font-mono text-xs text-slate-400 transition-colors duration-300 group-hover:text-orange-400 group-focus-within:text-orange-400 2xl:text-sm"
+                          >
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
+                          <span className="text-sm font-medium leading-6 text-[#0B1F3A] transition-colors duration-300 group-hover:text-white group-focus-within:text-white sm:text-base 2xl:text-lg 2xl:leading-7 min-[2400px]:text-2xl">
+                            {item.label}
+                          </span>
+                        </span>
+                        <FiArrowUpRight
+                          aria-hidden="true"
+                          className="shrink-0 text-[#0B1F3A] transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-orange-400 group-focus-within:text-orange-400"
+                          size={18}
+                        />
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            {/* Action Buttons */}
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center 2xl:mt-10 2xl:gap-4">
+            {/* Actions */}
+            <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center 2xl:mt-12 2xl:gap-4 min-[2400px]:mt-14">
               <Link
                 href="/courses"
-                className="group inline-flex items-center justify-center rounded-md bg-orange-500 px-7 py-3.5 text-sm font-bold text-white shadow-md transition-all duration-200 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 2xl:px-8 2xl:py-4 2xl:text-base"
+                className="group relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-sm bg-orange-400 px-6 py-3.5 text-sm font-semibold text-[#0B1F3A] shadow-sm transition-colors duration-300 hover:text-orange-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-2 2xl:px-8 2xl:py-4 2xl:text-base min-[2400px]:px-10 min-[2400px]:py-5 min-[2400px]:text-xl"
               >
-                Browse All Courses
-                <svg
-                  className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1 2xl:h-5 2xl:w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                  />
-                </svg>
+                <span aria-hidden="true" className="absolute inset-0 -translate-x-full bg-[#0B1F3A] transition-transform duration-300 ease-out group-hover:translate-x-0" />
+                <span className="relative z-10">Browse all courses</span>
+                <FiArrowUpRight
+                  aria-hidden="true"
+                  className="relative z-10 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
+                  size={18}
+                />
               </Link>
 
               <Link
                 href="/apply"
-                className="inline-flex items-center justify-center rounded-md border-2 border-[#0B1F3A] bg-transparent px-7 py-3.5 text-sm font-bold text-[#0B1F3A] transition-all duration-200 hover:bg-[#0B1F3A] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#0B1F3A] focus:ring-offset-2 2xl:px-8 2xl:py-4 2xl:text-base"
+                className="inline-flex items-center justify-center rounded-sm border-2 border-[#0B1F3A] bg-white/60 px-6 py-3.5 text-sm font-semibold text-[#0B1F3A] backdrop-blur-sm transition-colors duration-200 hover:bg-[#0B1F3A] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B1F3A] focus-visible:ring-offset-2 2xl:px-8 2xl:py-4 2xl:text-base min-[2400px]:px-10 min-[2400px]:py-5 min-[2400px]:text-xl"
               >
-                Apply Online Today
+                Apply online
               </Link>
             </div>
 
-            {/* Location Footnote */}
-            <div className="mt-6 flex items-center gap-2 text-xs text-slate-500 2xl:mt-8 2xl:text-sm">
-              <svg
-                className="h-4 w-4 shrink-0 text-orange-500 2xl:h-5 2xl:w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-              </svg>
-              <span>Main Campus: Komora Centre, Eldoret</span>
-            </div>
-
+            {/* Location */}
+            <p className="mt-6 flex items-center gap-2 text-xs text-slate-500 2xl:mt-8 2xl:text-sm min-[2400px]:text-base">
+              <span aria-hidden="true" className="h-2 w-2 shrink-0 bg-orange-400" />
+              Main campus: Komora Centre, Eldoret
+            </p>
           </div>
-
         </div>
       </div>
 
       {/* Bottom accent strip */}
-      <div className="absolute bottom-0 left-0 right-0 flex h-1 w-full">
+      <div aria-hidden="true" className="absolute inset-x-0 bottom-0 flex h-1 w-full">
         <div className="h-full w-2/3 bg-[#0B1F3A]" />
-        <div className="h-full w-1/3 bg-orange-500" />
+        <div className="h-full w-1/3 bg-orange-400" />
       </div>
-
-      {/* Continuous Animation Styles */}
-      <style jsx>{`
-        .scroll-down {
-          animation: infiniteScrollDown 22s linear infinite;
-        }
-
-        .scroll-up {
-          animation: infiniteScrollUp 26s linear infinite;
-        }
-
-        .scroll-down-slow {
-          animation: infiniteScrollDown 30s linear infinite;
-        }
-
-        .scroll-wrapper:hover .scroll-down,
-        .scroll-wrapper:hover .scroll-up,
-        .scroll-wrapper:hover .scroll-down-slow {
-          animation-play-state: paused;
-        }
-
-        @keyframes infiniteScrollDown {
-          0% {
-            transform: translateY(0);
-          }
-          100% {
-            transform: translateY(-50%);
-          }
-        }
-
-        @keyframes infiniteScrollUp {
-          0% {
-            transform: translateY(-50%);
-          }
-          100% {
-            transform: translateY(0);
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .scroll-down,
-          .scroll-up,
-          .scroll-down-slow {
-            animation: none;
-          }
-        }
-      `}</style>
     </section>
   );
 }
