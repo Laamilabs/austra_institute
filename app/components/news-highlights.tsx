@@ -78,7 +78,7 @@ export default async function NewsHighlights() {
       aria-labelledby="news-highlights-title"
       className="w-full px-5 py-6 sm:px-8 sm:py-2 lg:px-16 lg:py-2 2xl:px-24"
     >
-      <div className="mx-auto max-w-full">
+      <div className="mx-auto max-w-[1760px]">
         <div className="mb-8 flex flex-col gap-5 border-b border-slate-200 pb-6 sm:mb-10 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="flex items-center gap-3 text-[10px] font-extrabold uppercase tracking-[0.19em] text-slate-500">
