@@ -118,7 +118,7 @@ export default function SchoolsGrid({ initialSchools }: { initialSchools: Depart
 
   return (
     <section id="schools" className="w-full bg-slate-50 px-4 pb-16 pt-4 sm:px-6 sm:pb-20 sm:pt-6 lg:px-8 2xl:px-12 2xl:pb-28">
-      <div className="mx-auto max-w-7xl 2xl:max-w-384 3xl:max-w-[1920px]">
+      <div className="mx-auto max-w-7xl 2xl:max-w-384 3xl:max-w-[1920px] min-[2600px]:max-w-none">
         <div className="mb-10 flex flex-col gap-4 border-b border-slate-200 pb-6 sm:flex-row sm:items-end sm:justify-between 2xl:mb-14 2xl:pb-8">
           <div style={{ fontFamily: "var(--font-nunito)" }}>
             <div className="mb-3 flex items-center gap-3">
@@ -137,8 +137,8 @@ export default function SchoolsGrid({ initialSchools }: { initialSchools: Depart
         </div>
 
         {loading ? (
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-6" aria-label="Loading schools">
-            {[0, 1, 2].map((item) => (
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-6 min-[2600px]:grid-cols-6 min-[2600px]:gap-10" aria-label="Loading schools">
+            {[0, 1, 2, 3, 4, 5].map((item) => (
               <div key={item} className="animate-pulse overflow-hidden rounded-sm border border-slate-200 bg-white">
                 <div className="h-48 bg-slate-200 2xl:h-56 3xl:h-64" />
                 <div className="space-y-3 px-6 py-5">
@@ -166,7 +166,7 @@ export default function SchoolsGrid({ initialSchools }: { initialSchools: Depart
             No schools are available at the moment.
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-6">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-6 min-[2600px]:grid-cols-6 min-[2600px]:gap-10">
             {schools.map((school) => {
               const visual = getVisual(school);
               const coursesCount = Array.isArray(school.courses) ? school.courses.length : null;
@@ -184,7 +184,7 @@ export default function SchoolsGrid({ initialSchools }: { initialSchools: Depart
                         alt={school.name}
                         fill
                         loading="lazy"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1536px) 33vw, 20vw"
+                        sizes="(min-width: 2600px) 15vw, (max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1536px) 33vw, 20vw"
                         className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
                       />
                     )}
