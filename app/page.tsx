@@ -44,9 +44,9 @@ export default async function Home() {
       <Hero />
       <TvetCertification />
       <NewsHighlights />
-      <SchoolsGrid initialSchools={schools} />
-      <FeaturedCourses initialCourses={featuredCourses} />
       <CTA />
+      <FeaturedCourses initialCourses={featuredCourses} />
+      <SchoolsGrid initialSchools={schools} />
       <LocationSection />
       <PartnersSection />
     </div>
