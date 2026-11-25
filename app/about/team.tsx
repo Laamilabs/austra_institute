@@ -9,20 +9,20 @@ const teamMembers = [
     imagePosition: "50% 18%",
     isDirector: true,
   },
-
+  {
+    name: "Antonette Barkuang",
+    role: "Principal",
+    bio: "With a Master of Philosophy in Educational Administration and Management, Ms. Antonette Barkuang provides academic leadership at Austra Training Institute, guiding the delivery of quality, relevant, and practical education. She is committed to strengthening teaching and learning, promoting academic excellence, and ensuring that students gain the knowledge, skills, and confidence needed to succeed in their chosen careers.",
+    image: "/team/anto.jpg",
+    imagePosition: "50% 20%",
+    isPrincipal: true,
+  },
   {
     name: "Keter Titus",
     role: "Head of Science & Technology",
     bio: "Leads the Science and Technology department, with an emphasis on practical learning, technology integration, and skills shaped by industry needs.",
     image: "/team/keter.jpg",
     imagePosition: "50% 24%",
-  },
-  {
-    name: "Antonette Babra",
-    role: "Head of Languages & International Studies",
-    bio: "Leads language and international studies programmes, helping learners build communication skills and cross-cultural understanding.",
-    image: "/team/anto.jpg",
-    imagePosition: "50% 20%",
   },
   {
     name: "Sandra Koech",
