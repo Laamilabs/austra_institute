@@ -10,9 +10,9 @@ const teamMembers = [
     isDirector: true,
   },
   {
-    name: "Antonette Barkuang",
+    name: "Antonette Barkwang",
     role: "Principal",
-    bio: "With a Master of Philosophy in Educational Administration and Management, Ms. Antonette Barkuang provides academic leadership at Austra Training Institute, guiding the delivery of quality, relevant, and practical education. She is committed to strengthening teaching and learning, promoting academic excellence, and ensuring that students gain the knowledge, skills, and confidence needed to succeed in their chosen careers.",
+    bio: "With a Master of Philosophy in Educational Administration and Management, Ms. Antonette Barkwang provides academic leadership at Austra Training Institute, guiding the delivery of quality, relevant, and practical education. She is committed to strengthening teaching and learning, promoting academic excellence, and ensuring that students gain the knowledge, skills, and confidence needed to succeed in their chosen careers.",
     image: "/team/anto.jpg",
     imagePosition: "50% 20%",
     isPrincipal: true,
